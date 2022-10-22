@@ -10,6 +10,5 @@
 
 ## HPC en Sistemas Distribuidos
 
-* [Laboratorio MPI](https://raw.githubusercontent.com/acaldero/uc3m_ssdd/main/lab_mpi/README.md)
-
+* [Laboratorio MPI](https://github.com/acaldero/uc3m_ssdd/tree/main/lab_mpi)
 
