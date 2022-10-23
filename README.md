@@ -2,7 +2,7 @@
 
 <html>
 <ul>
-<li> License <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">GNU LGPL 2.1</a> </li>
+<li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
 <li> Curso 2022-2023</li>
 </ul>
 </html>
@@ -12,7 +12,7 @@
 
 ### Hola mundo en MPI
 
-* hello_world.c
+* Hay que editar un archivo hello_world.c con un contenido similar a:
 ``` C
 #include <stdio.h>
 #include <mpi.h>
@@ -42,14 +42,28 @@ int main(int argc, char** argv)
 }
 ```
 
+* Para compilar hay que usar mpicc:
+``` bash
+mpicc -g -Wall -c hello_world.c -o hello_world.c
+mpicc -g -Wall -o hello_world
+```
+
+* Para ejecutar en unas máquinas accesibles por ssh se puede usar mpirun:
+``` bash
+cat <<EOF > machines
+#!/bin/bash
+localhost
+localhost
+EOF
+
+mpirun -np 2  hello_world
+```
+
 #### Bibliografía de ejemplos de MPI
 
 * [mpi_hello_world.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
 
-### Entornos
-
-* [Cluster virtual]()
 
 
 ## Alta Escalabilidad en Sistemas Distribuidos
@@ -97,6 +111,6 @@ words.saveAsTextFile("c:\\\\temp\\\\pg2000-w.txt")
 * [Ejemplos iniciales de uso de Spark](https://spark.apache.org/examples.html)
 
 
-### Entornos
+## Entornos
 
 * [Cluster virtual]()
