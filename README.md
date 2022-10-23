@@ -10,7 +10,39 @@
 
 ## HPC en Sistemas Distribuidos
 
-### MPI: ejemplos
+### Hola mundo en MPI
+
+* hello_world.c
+``` C
+#include <stdio.h>
+#include <mpi.h>
+
+
+int main(int argc, char** argv)
+{
+   int world_size;
+   int world_rank;
+   char processor_name[MPI_MAX_PROCESSOR_NAME];
+   int name_len;
+
+   MPI_Init(&argc, &argv);
+
+   // Obtener el número de procesos e identificador del actual proceso (rank)
+   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+   MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
+   // Obtener el nombre de la máquina
+   MPI_Get_processor_name(processor_name, &name_len);
+
+   // Imprimir hola mundo...
+   printf("Hola mundo desde '%s' (rank %d de %d)\n",
+          processor_name, world_rank, world_size);
+
+   MPI_Finalize();
+}
+```
+
+#### Bibliografía de ejemplos de MPI
 
 * [mpi_hello_world.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
