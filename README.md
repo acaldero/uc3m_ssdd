@@ -44,19 +44,18 @@ int main(int argc, char** argv)
 
 * Para compilar hay que usar mpicc:
 ``` bash
-mpicc -g -Wall -c hello_world.c -o hello_world.c
-mpicc -g -Wall -o hello_world
+mpicc -g -Wall -c hello_world.c -o hello_world.o
+mpicc -g -Wall -o hello_world hello_world.o
 ```
 
 * Para ejecutar en unas máquinas accesibles por ssh se puede usar mpirun:
 ``` bash
 cat <<EOF > machines
-#!/bin/bash
 localhost
 localhost
 EOF
 
-mpirun -np 2  hello_world
+mpirun -np 2 -machinefile machines hello_world
 ```
 
 #### Bibliografía de ejemplos de MPI
