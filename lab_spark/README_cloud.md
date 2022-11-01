@@ -57,7 +57,7 @@ exit
 
 #### Ejemplo de uso de CPU para reparto de trabajo con Spark (cálculo del número PI):
 
-* calculo-pi.ipynb
+* calculo-pi.py
 ``` python
 import sys
 from random import random
@@ -80,22 +80,24 @@ spark.stop()
 #### Ejemplo de procesar datos (contar ocurrencia de palabras en fichero):
 
 * [pg2000.txt](https://www.gutenberg.org/files/2000/2000-0.txt)
-* pg2000.ipynb
+* pg2000.py
 ``` python
-from pyspark import SparkContext
-sc = SparkContext.getOrCreate()
-myRDD = sc.textFile("c:\\\\temp\\\\pg2000.txt")
-words = myRDD.flatMap(lambda line: line.split(" ")) \
-             .map(lambda word: (word, 1)) \
-             .reduceByKey(lambda a, b: a + b)
-words.saveAsTextFile("c:\\\\temp\\\\pg2000-w.txt")
+import sys
+from operator import add
+from pyspark.sql import SparkSession
+
+sc = SparkSession.builder.appName("pywc").getOrCreate()
+lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
+counts = lines.flatMap(lambda x: x.split(' ')) \
+              .map(lambda x: (x, 1)) \
+              .reduceByKey(add)
+output = counts.collect()
+counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
+sc.stop()
 ```
 
 #### Bibliografía de ejemplos de Spark
 
 * [Ejemplos iniciales de uso de Spark](https://spark.apache.org/examples.html)
+* [Ejemplos en python](https://github.com/apache/spark/tree/master/examples/src/main/python)
 
-
-## Entornos
-
-* [Cluster virtual]()
