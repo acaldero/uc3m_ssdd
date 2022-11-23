@@ -10,18 +10,8 @@
 
 ## Alta Escalabilidad en Sistemas Distribuidos
 
-### 1. Pre-requisitos
 
-Ha de disponer de:
-1. Cuenta en el Laboratorio del Departamento de Informática:
-   * Para solicitar la apertura de cuenta siga los pasos indicados en:
-     * https://www.lab.inf.uc3m.es/servicios/apertura-de-cuenta/
-1. El software MobaXterm (o similar):
-   * El Laboratorio del Departamento de Informática dispone de un manual muy recomendable en:
-     * https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
-
-
-### 2. Conexión SSH con las máquinas de trabajo
+### 1. Conexión SSH con las máquinas de trabajo
 
 * Si está fuera de la Universidad entonces una opción es primero conectarse a la máquina guernika.lab.inf.uc3m.es:
 ```
@@ -53,7 +43,7 @@ exit
 ```
 
 
-### 3. Spark: ejemplos
+### 2. Spark: ejemplos
 
 #### Ejemplo de uso de CPU para reparto de trabajo con Spark (cálculo del número PI):
 

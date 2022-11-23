@@ -10,52 +10,38 @@
 
 ## HPC en Sistemas Distribuidos
 
-### 1. Pre-requisitos
 
-Ha de disponer de:
-1. Cuenta en el Laboratorio del Departamento de Informática:
-   * Para solicitar la apertura de cuenta siga los pasos indicados en:
-     * https://www.lab.inf.uc3m.es/servicios/apertura-de-cuenta/
-1. El software MobaXterm (o similar):
-   * El Laboratorio del Departamento de Informática dispone de un manual muy recomendable en:
-     * https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
+### 1. Conexión SSH con las máquinas de trabajo
 
-
-### 2. Conexión SSH con las máquinas de trabajo
-
-* Si está fuera de la Universidad entonces una opción es primero conectarse a la máquina guernika.lab.inf.uc3m.es:
+* Estando dentro de la Universidad ha de conectarse a la máquina ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
 ```
-ssh -l <usuario+a cuenta en laboratorio> guernika.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux guernika...
-...
-```
-
-* Si está dentro de la Universidad (ya sea con VPN o con conexión a guernika), a continuación ha de conectarse a la máquina avignon.lab.inf.uc3m.es:
-```
-ssh -l <usuario+a cuenta en laboratorio> avignon.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux avignon-frontend...
-...
-```
-
-* A continuación conectarse a la máquina ssdd0.cloud.lab.inf.uc3m.es:
-```
-ssh  lab@avignon.lab.inf.uc3m.es
+ssh  lab@ssdd0.cloud.lab.inf.uc3m.es
 lab@ssdd0.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
 Linux ssdd0...
 ...
 ```
 
-* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta (ssdd0, avignon, guernika, etc.) usando el mandato exit:
+* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta usando el mandato exit:
 ```
 exit
 ```
 
 
+### 2. Ciclo de trabajo habitual
+
+* Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle con los siguientes pasos en cada iteración:
+  1 Editar el archivo fuente para añadir funcionalidad.
+    * Anotar como comentario lo que se quiere hacer
+    * Después de cada comentario añadir el código fuente asociado.
+  2 Compilar el archivo fuente a binario.
+    * Eliminar errores de compilación.
+  3 Ejecutar el archivo binario.
+    * Eliminar errores de ejecución.
+
+
 ### 3. Hola mundo en MPI
 
-* Hay que editar un archivo hello_world.c con un contenido similar a:
+* Hay que editar un archivo hola.c con un contenido similar a:
 ``` C
 #include <stdio.h>
 #include <mpi.h>
@@ -87,26 +73,50 @@ int main(int argc, char** argv)
 
 * Para compilar hay que usar mpicc:
 ``` bash
-mpicc -g -Wall -c hello_world.c -o hello_world.o
-mpicc -g -Wall -o hello_world hello_world.o
+mpicc -g -Wall -c hola.c -o hola.o
+mpicc -g -Wall -o hola hola.o
 ```
 
-* Ha de crear un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
+* Para ejecutar en la máquina local hay que hacer dos pasos:
+  * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
 ``` bash
 cat <<EOF > machines
 localhost
 localhost
 EOF
 ```
-
-* Para ejecutar en unas máquinas accesibles por ssh se puede usar mpirun:
+  * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 2 -machinefile machines ./hello_world
+mpirun -np 2 -machinefile machines ./hola
+```
+
+
+* Para ejecutar en dos nodos hay que hacer tres pasos:
+  * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
+``` bash
+cat <<EOF > machines
+nodo1
+nodo2
+EOF
+```
+  * Ha de tener el ejecutable en todos los nodos
+``` bash
+scp hola nodo1:~/hola
+scp hola nodo2:~/hola
+```
+  * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
+``` bash
+mpirun -np 2 -machinefile machines ./hola
+    La salida será:
+```
+``` bash
+Hola mundo desde 'nodo1' (rank 0 de 2)
+Hola mundo desde 'nodo2' (rank 1 de 2)
 ```
 
 #### Bibliografía de ejemplos de MPI
 
-* [mpi_hello_world.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c)
+* [mpi_hola.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hola.c)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
 
 
