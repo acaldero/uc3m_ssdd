@@ -1,4 +1,4 @@
-## Materiales para Sistemas Distribuidos
+## Laboratorio de HPC en Sistemas Distribuidos
 
 <html>
 <ul>
@@ -8,10 +8,7 @@
 </html>
 
 
-## HPC en Sistemas Distribuidos
-
-
-### 1. Conexión SSH con las máquinas de trabajo
+## Conexión SSH con las máquinas de trabajo
 
 * Estando dentro de la Universidad ha de conectarse a la máquina ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
 ```
@@ -27,21 +24,24 @@ exit
 ```
 
 
-### 2. Ciclo de trabajo habitual
+## Ciclo de trabajo habitual
 
-* Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle con los siguientes pasos en cada iteración:
-  1 Editar el archivo fuente para añadir funcionalidad.
-    * Anotar como comentario lo que se quiere hacer
-    * Después de cada comentario añadir el código fuente asociado.
-  2 Compilar el archivo fuente a binario.
-    * Eliminar errores de compilación.
-  3 Ejecutar el archivo binario.
-    * Eliminar errores de ejecución.
+Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle con los siguientes pasos en cada iteración:
+
+ 1 Editar el archivo fuente para añadir funcionalidad.
+   * Anotar como comentario lo que se quiere hacer
+   * Después de cada comentario añadir el código fuente asociado.
+   
+ 2 Compilar el archivo fuente a binario.
+   * Eliminar errores de compilación.
+   
+ 3 Ejecutar el archivo binario.
+   * Eliminar errores de ejecución.
 
 
-### 3. Hola mundo en MPI
+## 1. Editar el "hola mundo" en MPI
 
-* Hay que editar un archivo hola.c con un contenido similar a:
+Hay que editar un archivo hola.c con un contenido similar a:
 ``` C
 #include <stdio.h>
 #include <mpi.h>
@@ -71,14 +71,20 @@ int main(int argc, char** argv)
 }
 ```
 
-* Para compilar hay que usar mpicc:
+
+## 2. Compilar el "hola mundo" en MPI
+ 
+Para compilar hay que usar mpicc:
 ``` bash
 mpicc -g -Wall -c hola.c -o hola.o
 mpicc -g -Wall -o hola hola.o
 ```
 
-* Para ejecutar en la máquina local hay que hacer dos pasos:
-  * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
+
+## 3. Ejecutar el "hola mundo" en MPI (local)
+
+Para ejecutar en la máquina local hay que hacer dos pasos:
+   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
 ``` bash
 cat <<EOF > machines
 localhost
@@ -91,7 +97,9 @@ mpirun -np 2 -machinefile machines ./hola
 ```
 
 
-* Para ejecutar en dos nodos hay que hacer tres pasos:
+## 3. Ejecutar el "hola mundo" en MPI (remoto)
+
+Para ejecutar en dos nodos hay que hacer tres pasos:
   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
 ``` bash
 cat <<EOF > machines
@@ -99,7 +107,7 @@ nodo1
 nodo2
 EOF
 ```
-  * Ha de tener el ejecutable en todos los nodos
+  * Ha de tener el ejecutable en todos los nodos:
 ``` bash
 scp hola nodo1:~/hola
 scp hola nodo2:~/hola
@@ -107,14 +115,14 @@ scp hola nodo2:~/hola
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
 mpirun -np 2 -machinefile machines ./hola
-    La salida será:
 ```
+La salida será:
 ``` bash
 Hola mundo desde 'nodo1' (rank 0 de 2)
 Hola mundo desde 'nodo2' (rank 1 de 2)
 ```
 
-#### Bibliografía de ejemplos de MPI
+## Bibliografía de ejemplos de MPI
 
 * [mpi_hola.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hola.c)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
