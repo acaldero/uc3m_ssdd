@@ -10,36 +10,55 @@
 
 ## Alta Escalabilidad en Sistemas Distribuidos
 
+### 1. Instalación de software (si no está ya instalado)
 
-### 1. Conexión SSH con las máquinas de trabajo
+#### A. Instalación Apache Spark
 
-* Si está fuera de la Universidad entonces una opción es primero conectarse a la máquina guernika.lab.inf.uc3m.es:
+Instalar dependencias:
 ```
-ssh -l <usuario+a cuenta en laboratorio> guernika.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux guernika...
-...
-```
-
-* Si está dentro de la Universidad (ya sea con VPN o con conexión a guernika), a continuación ha de conectarse a la máquina avignon.lab.inf.uc3m.es:
-```
-ssh -l <usuario+a cuenta en laboratorio> avignon.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux avignon-frontend...
-...
+sudo apt-get install ssh rsync
+sudo apt-get install default-jdk
 ```
 
-* A continuación conectarse a la máquina ssdd0.cloud.lab.inf.uc3m.es:
+Instalar Apache Spark:
 ```
-ssh  lab@avignon.lab.inf.uc3m.es
-lab@ssdd0.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux ssdd0...
-...
+wget https://www.apache.org/dyn/closer.lua/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3.tgz
+tar zxf spark-3.3.1-bin-hadoop3.tgz
+ln -s spark-3.3.1-bin-hadoop3 spark
 ```
 
-* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta (ssdd0, avignon, guernika, etc.) usando el mandato exit:
+Prueba básica:
 ```
-exit
+./spark/bin/run-example SparkPi 5
+```
+
+#### B. Instalación Anaconda
+
+Instalar Anaconda:
+```
+wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+chmod a+x Anaconda3-2022.10-Linux-x86_64.sh
+./Anaconda3-2022.10-Linux-x86_64.sh -b
+source ~/.profile
+conda update --all
+conda clean  --all
+```
+
+#### C. Instalación Jupyter notebook
+
+Instalar jupyter:
+```
+apt-get install jupyter-notebook
+```
+
+Instalar jupyter con conda:
+```
+conda install jupyter
+```
+
+Prueba básica:
+```
+jupyter notebook
 ```
 
 

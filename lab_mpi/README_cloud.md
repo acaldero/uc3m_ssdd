@@ -8,22 +8,6 @@
 </html>
 
 
-## Conexión SSH con las máquinas de trabajo
-
-* Estando dentro de la Universidad ha de conectarse a la máquina ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
-```
-ssh  lab@ssdd0.cloud.lab.inf.uc3m.es
-lab@ssdd0.lab.inf.uc3m.es's password: <clave que no se mostrará cuando escriba>
-Linux ssdd0...
-...
-```
-
-* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta usando el mandato exit:
-```
-exit
-```
-
-
 ## Ciclo de trabajo habitual
 
 Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle con los siguientes pasos en cada iteración:
