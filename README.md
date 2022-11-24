@@ -8,33 +8,32 @@
 </html>
 
 
-## Pre-requisitos generales
+## Laboratorios complementarios: pre-requisitos generales
 
-Ha de disponer de:
-A. Ordenador propio con la distribución Linux Ubuntu 22.04 LTS o compatible.
-B. Acceso remoto a al menos un ordenador con Linux Ubuntu 22.04 LTS o compatible.
+Ha de disponer de un ordenador propio o acceso remoto a un ordenador.
+Como ordenador vale una máquina real, una máquina virtual o un contenedor.
+Se recomienda tener acceso a tres ordenadores interconectados entre ellos con SSH.
 
-El ordenador puede ser una máquina real, una máquina virtual o un contenedor.
-Para seguir los laboratorios se precisa que en cualquier caso tenga:
+Para seguir los laboratorios se precisa que, en cualquier caso, los ordenadores tengan:
 * Instalada una distribución Linux Ubuntu 22.04 LTS o compatible.
 * Al menos 2 GiB de RAM y 20 GiB de disco duro.
+* Acceso por SSH.
 
 
-## Laboratorios complementarios propuestos en cloud.lab.inf.uc3m.es
-
-### Pre-requisitos para trabajar en cloud.lab.inf.uc3m.es
+## Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es
 
 Ha de disponer de:
 1. Cuenta en el Laboratorio del Departamento de Informática.
 2. El software MobaXterm (o similar).
-3. Estar conectado dentro de la Universidad, ya sea con VPN o con conexión a guernika.lab.inf.uc3m.es.
+3. Estar conectado dentro de la red de la Universidad, ya sea con VPN o con conexión a través de guernika.lab.inf.uc3m.es.
 
 Como ayuda:
 1. Para solicitar la apertura de cuenta siga los pasos indicados en: https://www.lab.inf.uc3m.es/servicios/apertura-de-cuenta/
 2. El Laboratorio del Departamento de Informática dispone de un manual de MobaXterm en: https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
 3. La información de VPN para la Universidad está en: https://www.uc3m.es/sdic/servicios/vpn
 
-### Conexión SSH con las máquinas de trabajo
+
+## Conexión SSH con las máquinas de trabajo
 
 * Estando dentro de la Universidad ha de conectarse a la máquina ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
 ```
@@ -48,6 +47,7 @@ Linux ssdd0...
 ```
 exit
 ```
+
 
 ### Laboratorios complementarios propuestos:
 

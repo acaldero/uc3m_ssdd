@@ -1,4 +1,4 @@
-## Laboratorio de HPC en Sistemas Distribuidos
+## Materiales para Sistemas Distribuidos
 
 <html>
 <ul>
@@ -6,6 +6,16 @@
 <li> Curso 2022-2023</li>
 </ul>
 </html>
+
+
+## Laboratorio de HPC en Sistemas Distribuidos
+
+A. [Ciclo de trabajo habitual](#ciclo-de-trabajo-habitual)
+1. [Editar el "hola mundo" en MPI](#editar-el-hola-mundo-en-mpi)
+2. [Compilar el "hola mundo" en MPI](#Compilar el "hola mundo" en MPI)
+3. [Ejecutar el "hola mundo" en MPI (local)](#ejecutar-el-hola-mundo-en-MPI-local)
+3. [Ejecutar el "hola mundo" en MPI (remoto)](#ejecutar-el-hola-mundo-en-MPI-remoto)
+B. [Agradecimientos](#agradecimientos)
 
 
 ## Ciclo de trabajo habitual
@@ -81,7 +91,7 @@ mpirun -np 2 -machinefile machines ./hola
 ```
 
 
-## 3. Ejecutar el "hola mundo" en MPI (remoto)
+## 4. Ejecutar el "hola mundo" en MPI (remoto)
 
 Para ejecutar en dos nodos hay que hacer tres pasos:
   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
@@ -106,9 +116,14 @@ Hola mundo desde 'nodo1' (rank 0 de 2)
 Hola mundo desde 'nodo2' (rank 1 de 2)
 ```
 
+
 ## Bibliografía de ejemplos de MPI
 
 * [mpi_hola.c](https://github.com/mpitutorial/mpitutorial/blob/gh-pages/tutorials/mpi-hello-world/code/mpi_hola.c)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
 
+
+## Agradecimientos
+
+Por último pero no por ello menos importante, agradecer al personal del Laboratorio del Departamento de Informática toda la ayuda prestada para que este laboratorio sea posible.
 
