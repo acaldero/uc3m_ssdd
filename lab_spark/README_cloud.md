@@ -15,7 +15,8 @@
 3. [Instalación de Python](#instalacion-de-python)
 4. [Instalación de Apache Spark](#instalacion-de-apache-spark)
 5. [Apache Spark en nodo autónomo y shell interactivo](#apache-spark-en-nodo-autonomo-y-shell-interactivo)
-6. [Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#ejemplo:-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
+6. [Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#ejemplo-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
+7. [Ejemplo: contar ocurrencias de palabras en fichero autónomo y shell interactivo](#ejemplo-contar-ocurrencias-de-palabras-en-nodo-autonomo-y-shell-interactivo)
 A. [Agradecimientos](#agradecimientos)
 
 
