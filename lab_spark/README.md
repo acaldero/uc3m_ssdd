@@ -75,8 +75,8 @@ exit
 <td>Instalar Python3</td>
 <td>
 <small><pre class="m-0">
-apt-get install python3-minimal \
-                python3-pip
+sudo apt-get install \
+     python3-minimal python3-pip
 </pre></small>
 </td>
 <td>
@@ -93,7 +93,7 @@ conda clean  --all
 
 <tr>
 <td>Instalar jupyter</td>
-<td><pre>apt-get install jupyter-notebook</pre></td>
+<td><pre>sudo apt-get install jupyter-notebook</pre></td>
 <td><pre>conda install jupyter</pre></td>
 </tr>
 
@@ -161,11 +161,6 @@ Donde el parámetro de "--master" puede ser:
 * local[\*] -> tantos hilos como cores haya en el sistema (nproc --all)
 
 
-También es posible utilizar R en lugar de Python usando:
-```
-./spark/bin/sparkR   --master local[2]
-```
-
 Tras ejecutar pyspark como se ha indicado anteriormente, la salida debería ser parecida a:
 ```
 Python 3.10.6 (main, Nov  2 2022, 18:53:38) [GCC 11.3.0] on linux
@@ -228,22 +223,22 @@ Tras introducir el código y dar enter se ejecutará, y la salida debería ser p
 >>> from random import random
 >>> from operator import add
 >>> from pyspark.sql import SparkSession
->>>
+>>> 
 >>> partitions = 2
 >>> n = 100000 * partitions
 >>> def f(_):
 ...    x = random() * 2 - 1
 ...    y = random() * 2 - 1
 ...    return 1 if x ** 2 + y ** 2 < 1 else 0
-...
+... 
 >>> spark = SparkSession.builder.appName("PythonPi").getOrCreate()
-22/11/24 19:51:26 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
->>> count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
 
->>> print("Pi is roughly %f" % (4.0 * count / n))
-Pi is roughly 3.142320
+22/11/26 20:42:12 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+>>> count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
+>>> print("Pi is roughly %f" % (4.0 * count / n))                               
+Pi is roughly 3.138680
 >>> spark.stop()
->>>
+>>> 
 ```
 
 Para terminar la sesión ejecutaremos:
@@ -288,22 +283,20 @@ sc.stop()
 
 Tras introducir el código y dar enter se ejecutará, y la salida debería ser parecida a:
 ```
+>>> 
 >>> import sys
 >>> from operator import add
 >>> from pyspark.sql import SparkSession
->>>
+>>> 
 >>> sc = SparkSession.builder.appName("pywc").getOrCreate()
-  .reduceByKey(add)
-output = counts.collect()
-counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
-sc.stop()22/11/24 20:16:34 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
->>> lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
 
+22/11/26 20:44:30 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+>>> lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
 >>> counts = lines.flatMap(lambda x: x.split(' ')) \
 ...               .map(lambda x: (x, 1)) \
 ...               .reduceByKey(add)
 >>> output = counts.collect()
->>> counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
+>>> counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")                       
 >>> sc.stop()
 >>>
 ```
