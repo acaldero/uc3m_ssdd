@@ -10,25 +10,25 @@
 
 ## Laboratorio de HPC en Sistemas Distribuidos
 
-* Máquinas de trabajo
-1. [Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es](#pre-requisitos-para-trabajar-en-ssddx.cloud.lab.inf.uc3m.es)
-2. [Conexión SSH con las máquinas de trabajo](#conexion-ssh-con-las-maquinas-de-trabajo)
+1 Máquinas de trabajo:
+  * [1.1 Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es](#11-pre-requisitos-para-trabajar-en-ssddxcloudlabinfuc3mes)
+  * [1.2 Conexión SSH con las máquinas de trabajo](#12-conexión-ssh-con-las-máquinas-de-trabajo)
 
-* Software necesario
-1. [Instalación del paquete de desarrollo](#instalacion-del-paquete-de-desarrollo)
-2. [Instalación de MPI](#instalacion-de-mpi)
+2 Software necesario:
+  * [2.1 Instalación del paquete de desarrollo](#21-instalación-del-paquete-de-desarrollo)
+  * [2.2 Instalación de MPI](#22-instalación-de-mpi)
 
-* Ejemplos para aprender
-1. [Hola mundo en MPI](#hola-mundo-en-mpi)
+3 Ejemplos para aprender:
+  * [3.1 Hola mundo en MPI](#31-hola-mundo-en-mpi)
+  * [3.2 Cálculo de PI en MPI](#32-cálculo-de-pi-en-mpi)
 
-* [Agradecimientos](#agradecimientos)
+[Agradecimientos](#agradecimientos)
 
 
 
+## 1 Máquinas de trabajo
 
-## Máquinas de trabajo
-
-### Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es
+### 1.1 Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es
 
 Ha de disponer de:
 1. Cuenta en el Laboratorio del Departamento de Informática.
@@ -40,7 +40,7 @@ Como ayuda:
 2. El Laboratorio del Departamento de Informática dispone de un manual de MobaXterm en: https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
 3. La información de VPN para la Universidad está en: https://www.uc3m.es/sdic/servicios/vpn
 
-### Conexión SSH con las máquinas de trabajo
+### 1.2 Conexión SSH con las máquinas de trabajo
 
 * Estando dentro de la Universidad para iniciar la sesión de trabajo ha de conectarse a ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
 ```
@@ -56,9 +56,9 @@ exit
 ```
 
 
-## Software necesario
+## 2 Software necesario
 
-### Instalación del paquete de desarrollo
+### 2.1 Instalación del paquete de desarrollo
 
 Instalar compilador y depurador:
 ```
@@ -70,7 +70,7 @@ Instalar software adicional de apoyo:
 apt-get install gdb ddd valgrind cgdb ddd-doc
 ```
 
-### Instalación de MPI
+### 2.2 Instalación de MPI
 
 Instalar una implementación de MPI:
 ```
@@ -83,7 +83,7 @@ apt-get install valgrind-mpi xmpi
 ```
 
 
-## Ejemplos para aprender
+## 3 Ejemplos para aprender
 
 Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle con los siguientes pasos en cada iteración:
 
@@ -98,15 +98,9 @@ Se parte de un archivo fuente vacío y el ciclo de trabajo típico es un bucle c
    * Eliminar errores de ejecución.
 
 
-### Hola mundo en MPI
+### 3.1 Hola mundo en MPI
 
-Ejemplo de "hola mundo" en MPI:
-1. [Editar](#1-editar)
-2. [Compilar](#2-compilar)
-3. [Ejecutar (local)](#3-ejecutar-local)
-3. [Ejecutar (remoto)](#4-ejecutar-remoto)
-
-#### 1. Editar
+#### 1. Editar "hola mundo" en MPI
 
 Hay que editar un archivo [hola.c](hola.c) con un contenido similar a:
 ``` C
@@ -140,7 +134,7 @@ int main(int argc, char** argv)
 ```
 
 
-#### 2. Compilar
+#### 2. Compilar "hola mundo" en MPI
 
 Para compilar hay que usar mpicc:
 ``` bash
@@ -149,7 +143,7 @@ mpicc -g -Wall -o hola hola.o
 ```
 
 
-#### 3. Ejecutar (local)
+#### 3. Ejecutar en nodo local
 
 Para ejecutar en la máquina local hay que hacer dos pasos:
    * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
@@ -165,7 +159,7 @@ mpirun -np 2 -machinefile machines ./hola
 ```
 
 
-#### 4. Ejecutar (remoto)
+#### 4. Ejecutar en nodos remotos
 
 Para ejecutar en dos nodos hay que hacer tres pasos:
   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
@@ -182,22 +176,116 @@ scp hola nodo2:~/hola
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 2 -machinefile machines ./hola
+mpirun -np 4 -machinefile machines ./hola
 ```
 La salida será:
 ``` bash
-Hola mundo desde 'nodo1' (rank 0 de 2)
-Hola mundo desde 'nodo2' (rank 1 de 2)
+Hola mundo desde 'nodo1' (rank 0 de 4)
+Hola mundo desde 'nodo2' (rank 1 de 4)
+Hola mundo desde 'nodo1' (rank 2 de 4)
+Hola mundo desde 'nodo2' (rank 3 de 4)
+```
+
+
+### 3.2 Cálculo de PI en MPI
+
+#### 1. Editar
+
+Hay que editar un archivo [pi.c](pi.c) con un contenido similar a:
+``` C
+/* From https://www.mcs.anl.gov/research/projects/mpi/tutorial/mpiexmpl/src/pi/C/main.html */
+
+#include "mpi.h"
+#include <math.h>
+
+int main(argc,argv)
+int argc;
+char *argv[];
+{
+    int done = 0, n, myid, numprocs, i;
+    double PI25DT = 3.141592653589793238462643;
+    double mypi, pi, h, sum, x;
+
+    MPI_Init(&argc,&argv);
+    MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
+    MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+    while (!done)
+    {
+	if (myid == 0) {
+	    printf("Enter the number of intervals: (0 quits) ");
+	    scanf("%d",&n);
+	}
+	MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
+	if (n == 0) break;
+  
+	h   = 1.0 / (double) n;
+	sum = 0.0;
+	for (i = myid + 1; i <= n; i += numprocs) {
+	    x = h * ((double)i - 0.5);
+	    sum += 4.0 / (1.0 + x*x);
+	}
+	mypi = h * sum;
+    
+	MPI_Reduce(&mypi, &pi, 1, MPI_DOUBLE, MPI_SUM, 0,
+		   MPI_COMM_WORLD);
+    
+	if (myid == 0)
+	    printf("pi is approximately %.16f, Error is %.16f\n",
+		   pi, fabs(pi - PI25DT));
+    }
+    MPI_Finalize();
+    return 0;
+}
+```
+
+
+#### 2. Compilar
+
+Para compilar hay que usar mpicc:
+``` bash
+mpicc -o pi pi.c -lm
+```
+
+
+#### 3. Ejecutar (remoto)
+
+Para ejecutar en dos nodos hay que hacer tres pasos:
+  * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
+``` bash
+cat <<EOF > machines
+nodo1
+nodo2
+EOF
+```
+  * Ha de tener el ejecutable en todos los nodos:
+``` bash
+scp pi nodo1:~/hola
+scp pi nodo2:~/hola
+```
+  * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
+``` bash
+mpirun -np 2 -machinefile machines ./pi
+```
+La salida será:
+``` bash
+Enter the number of intervals: (0 quits) pi is approximately 3.1416009869231249, Error is 0.0000083333333318
+Enter the number of intervals: (0 quits) pi is approximately 3.1415927369231267, Error is 0.0000000833333336
+Enter the number of intervals: (0 quits) pi is approximately 3.1415926544231239, Error is 0.0000000008333307
+Enter the number of intervals: (0 quits) pi is approximately 3.1415926535981167, Error is 0.0000000000083236
+Enter the number of intervals: (0 quits) pi is approximately 3.1415926535899033, Error is 0.0000000000001101
+Enter the number of intervals: (0 quits)
 ```
 
 
 ## Bibliografía de ejemplos de MPI
 
 * [mpi_hola.c](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-hello-world/code)
+* [pi.c](https://www.mcs.anl.gov/research/projects/mpi/tutorial/mpiexmpl/src/pi/C/main.html)
 * [llamadas colectivas](https://github.com/mpitutorial/mpitutorial/tree/gh-pages/tutorials/mpi-broadcast-and-collective-communication)
 
 
 ## Agradecimientos
 
 Por último pero no por ello menos importante, agradecer al personal del Laboratorio del Departamento de Informática toda la ayuda prestada para que este laboratorio sea posible.
+
 
