@@ -62,24 +62,24 @@ exit
 
 Instalar compilador y depurador:
 ```
-apt-get install build-essential
+sudo apt-get install build-essential autoconf automake libtool m4
 ```
 
 Instalar software adicional de apoyo:
 ```
-apt-get install gdb ddd valgrind cgdb ddd-doc
+sudo apt-get install gdb ddd valgrind cgdb
 ```
 
 ### 2.2 Instalación de MPI
 
 Instalar una implementación de MPI:
 ```
-apt-get install mpi-default-bin mpi-default-dev
+sudo apt-get install mpich libmpich-dev libmpich12 
 ```
 
 Instalar software adicional de apoyo:
 ```
-apt-get install valgrind-mpi xmpi
+sudo apt-get install valgrind-mpi 
 ```
 
 
@@ -165,8 +165,7 @@ Para ejecutar en dos nodos hay que hacer tres pasos:
   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
 ``` bash
 cat <<EOF > machines
-nodo1
-nodo2
+ca
 EOF
 ```
   * Ha de tener el ejecutable en todos los nodos:
@@ -176,12 +175,12 @@ scp hola nodo2:~/hola
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 4 -machinefile machines ./hola
+mpirun -np 4 -machinefile machines ~/hola
 ```
 La salida será:
 ``` bash
-Hola mundo desde 'nodo1' (rank 0 de 4)
 Hola mundo desde 'nodo2' (rank 1 de 4)
+Hola mundo desde 'nodo1' (rank 0 de 4)
 Hola mundo desde 'nodo1' (rank 2 de 4)
 Hola mundo desde 'nodo2' (rank 3 de 4)
 ```
@@ -197,6 +196,7 @@ Hay que editar un archivo [pi.c](pi.c) con un contenido similar a:
 
 #include "mpi.h"
 #include <math.h>
+#include <stdio.h>
 
 int main(argc,argv)
 int argc;
@@ -259,21 +259,28 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos:
 ``` bash
-scp pi nodo1:~/hola
-scp pi nodo2:~/hola
+scp pi nodo1:~/pi
+scp pi nodo2:~/pi
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 2 -machinefile machines ./pi
+mpirun -np 2 -machinefile machines ~/pi
 ```
 La salida será:
 ``` bash
-Enter the number of intervals: (0 quits) pi is approximately 3.1416009869231249, Error is 0.0000083333333318
-Enter the number of intervals: (0 quits) pi is approximately 3.1415927369231267, Error is 0.0000000833333336
-Enter the number of intervals: (0 quits) pi is approximately 3.1415926544231239, Error is 0.0000000008333307
-Enter the number of intervals: (0 quits) pi is approximately 3.1415926535981167, Error is 0.0000000000083236
-Enter the number of intervals: (0 quits) pi is approximately 3.1415926535899033, Error is 0.0000000000001101
-Enter the number of intervals: (0 quits)
+Enter the number of intervals: (0 quits) 10
+pi is approximately 3.1424259850010983, Error is 0.0008333314113051
+Enter the number of intervals: (0 quits) 100
+pi is approximately 3.1416009869231241, Error is 0.0000083333333309
+Enter the number of intervals: (0 quits) 1000
+pi is approximately 3.1415927369231254, Error is 0.0000000833333322
+Enter the number of intervals: (0 quits) 10000
+pi is approximately 3.1415926544231318, Error is 0.0000000008333387
+Enter the number of intervals: (0 quits) 100000
+pi is approximately 3.1415926535981016, Error is 0.0000000000083085
+Enter the number of intervals: (0 quits) 1000000
+pi is approximately 3.1415926535899388, Error is 0.0000000000001457
+Enter the number of intervals: (0 quits) 0
 ```
 
 
