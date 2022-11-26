@@ -10,17 +10,25 @@
 
 ## Alta Escalabilidad en Sistemas Distribuidos
 
+* Máquinas de trabajo
 1. [Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es](#pre-requisitos-para-trabajar-en-ssddx.cloud.lab.inf.uc3m.es)
 2. [Conexión SSH con las máquinas de trabajo](#conexion-ssh-con-las-maquinas-de-trabajo)
+
+* Software necesario
 3. [Instalación de Python](#instalacion-de-python)
 4. [Instalación de Apache Spark](#instalacion-de-apache-spark)
+
+* Ejemplos para aprender
 5. [Apache Spark en nodo autónomo y shell interactivo](#apache-spark-en-nodo-autonomo-y-shell-interactivo)
 6. [Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#ejemplo-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
 7. [Ejemplo: contar ocurrencias de palabras en fichero autónomo y shell interactivo](#ejemplo-contar-ocurrencias-de-palabras-en-nodo-autonomo-y-shell-interactivo)
-A. [Agradecimientos](#agradecimientos)
+
+* [Agradecimientos](#agradecimientos)
 
 
-## 1. Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es
+## Máquinas de trabajo
+
+### 1. Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es
 
 Ha de disponer de:
 1. Cuenta en el Laboratorio del Departamento de Informática.
@@ -33,7 +41,7 @@ Como ayuda:
 3. La información de VPN para la Universidad está en: https://www.uc3m.es/sdic/servicios/vpn
 
 
-## 2. Conexión SSH con las máquinas de trabajo
+### 2. Conexión SSH con las máquinas de trabajo
 
 * Estando dentro de la Universidad para iniciar la sesión de trabajo ha de conectarse a ssddX.cloud.lab.inf.uc3m.es, siendo X = {0, 1, ... 8}:
 ```
@@ -49,9 +57,11 @@ exit
 ```
 
 
-## 3. Instalación de Python
+## Software necesario
 
-### A. Uso de PIP
+### 3. Instalación de Python
+
+#### A. Uso de PIP
 
 Instalar Python3 + PIP:
 ```
@@ -69,7 +79,7 @@ jupyter notebook
 ```
 
 
-### B. Uso de Anaconda
+#### B. Uso de Anaconda
 
 Instalar Anaconda:
 ```
@@ -92,7 +102,7 @@ jupyter notebook
 ```
 
 
-## 4. Instalación de Apache Spark
+### 4. Instalación de Apache Spark
 
 Para instalar las dependencias puede ejecutar:
 ```
@@ -131,7 +141,9 @@ Pi is roughly 3.14246228492457
 ```
 
 
-## 5. Apache Spark en nodo autónomo y shell interactivo
+## Ejemplos para aprender
+
+### 5. Apache Spark en nodo autónomo y shell interactivo
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
 ```
@@ -177,7 +189,7 @@ quit()
 También final de fichero (con las teclas control y D) debería de permitir finalizar la sesión con Apache Spark.
 
 
-## 6. Ejemplo: cálculo de pi en nodo autónomo y shell interactivo
+### 6. Ejemplo: cálculo de pi en nodo autónomo y shell interactivo
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
 ```
@@ -235,7 +247,7 @@ quit()
 ```
 
 
-## 7. Ejemplo: contar ocurrencias de palabras en fichero en nodo autónomo y shell interactivo
+### 7. Ejemplo: contar ocurrencias de palabras en fichero en nodo autónomo y shell interactivo
 
 Usaremos el quijote en texto plano para trabajar ([pg2000.txt](https://www.gutenberg.org/files/2000/2000-0.txt)) para lo que usaremos:
 ```

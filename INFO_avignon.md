@@ -8,7 +8,7 @@
 </html>
 
 
-## HPC en Sistemas Distribuidos
+## Sistema de colas en avignon.lab.inf.uc3m.es
 
 
 ### 1. Conexión SSH con las máquinas de trabajo
