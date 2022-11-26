@@ -10,20 +10,20 @@
 
 ## Alta Escalabilidad en Sistemas Distribuidos
 
-* Máquinas de trabajo
-1. [Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es](#pre-requisitos-para-trabajar-en-ssddx.cloud.lab.inf.uc3m.es)
-2. [Conexión SSH con las máquinas de trabajo](#conexion-ssh-con-las-maquinas-de-trabajo)
+1 Máquinas de trabajo:
+  * [1.1 Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es](#11-pre-requisitos-para-trabajar-en-ssddx.cloud.lab.inf.uc3m.es)
+  * [1.2 Conexión SSH con las máquinas de trabajo](#11-conexion-ssh-con-las-maquinas-de-trabajo)
 
-* Software necesario
-3. [Instalación de Python](#instalacion-de-python)
-4. [Instalación de Apache Spark](#instalacion-de-apache-spark)
+2 Software necesario:
+  * [2.1 Instalación de Python](#21-instalacion-de-python)
+  * [2.2 Instalación de Apache Spark](#22-instalacion-de-apache-spark)
 
-* Ejemplos para aprender
-5. [Apache Spark en nodo autónomo y shell interactivo](#apache-spark-en-nodo-autonomo-y-shell-interactivo)
-6. [Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#ejemplo-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
-7. [Ejemplo: contar ocurrencias de palabras en fichero autónomo y shell interactivo](#ejemplo-contar-ocurrencias-de-palabras-en-nodo-autonomo-y-shell-interactivo)
+3 Ejemplos para aprender:
+  * [3.1 Apache Spark en nodo autónomo y shell interactivo](#31-apache-spark-en-nodo-autonomo-y-shell-interactivo)
+  * [3.2 Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#32-ejemplo-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
+  * [3.3 Ejemplo: contar ocurrencias de palabras en fichero autónomo y shell interactivo](#33-ejemplo-contar-ocurrencias-de-palabras-en-nodo-autonomo-y-shell-interactivo)
 
-* [Agradecimientos](#agradecimientos)
+[Agradecimientos](#agradecimientos)
 
 
 ## Máquinas de trabajo
@@ -61,45 +61,50 @@ exit
 
 ### 3. Instalación de Python
 
-#### A. Uso de PIP
 
-Instalar Python3 + PIP:
-```
-apt-get install python3.10 python3.10-dev python3.10-minimal
-```
+<html>
+<table>
 
-Instalar jupyter:
-```
-apt-get install jupyter-notebook
-```
+<tr>
+<td></td>
+<td>Uso de PIP</td>
+<td>Uso de Anaconda</td>
+</tr>
 
-Prueba básica:
-```
-jupyter notebook
-```
-
-
-#### B. Uso de Anaconda
-
-Instalar Anaconda:
-```
+<tr>
+<td>Instalar Python3</td>
+<td>
+<small><pre class="m-0">
+apt-get install python3-minimal \
+                python3-pip
+</pre></small>
+</td>
+<td>
+<small><pre class="m-0">
 wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
 chmod a+x Anaconda3-2022.10-Linux-x86_64.sh
 ./Anaconda3-2022.10-Linux-x86_64.sh -b
 source ~/.profile
 conda update --all
 conda clean  --all
-```
+</pre></small>
+</td>
+</tr>
 
-Instalar jupyter con conda:
-```
-conda install jupyter
-```
+<tr>
+<td>Instalar jupyter</td>
+<td><pre>apt-get install jupyter-notebook</pre></td>
+<td><pre>conda install jupyter</pre></td>
+</tr>
 
-Prueba básica:
-```
-jupyter notebook
-```
+<tr>
+<td>Prueba básica</td>
+<td colspan="1"><pre>jupyter notebook</pre></td>
+<td colspan="1"><pre>jupyter notebook</pre></td>
+</tr>
+
+</table>
+</html>
 
 
 ### 4. Instalación de Apache Spark
@@ -123,7 +128,7 @@ La prueba básica de que funciona la instalación es:
 ```
 Debería de ver una salida como la siguiente:
 ```
-22/11/24 19:20:03 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+...
 22/11/24 19:20:04 INFO SparkContext: Running Spark version 3.3.0
 ...
 22/11/24 19:20:07 INFO DAGScheduler: Job 0 finished: reduce at SparkPi.scala:38, took 0.851307 s
@@ -167,7 +172,7 @@ Python 3.10.6 (main, Nov  2 2022, 18:53:38) [GCC 11.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-22/11/24 19:47:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+...
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
