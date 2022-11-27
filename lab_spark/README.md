@@ -22,6 +22,8 @@
   * [3.1 Apache Spark en nodo autónomo y shell interactivo](#31-apache-spark-en-nodo-autonomo-y-shell-interactivo)
   * [3.2 Ejemplo: cálculo de pi en nodo autónomo y shell interactivo](#32-ejemplo-calculo-de-pi-en-nodo-autonomo-y-shell-interactivo)
   * [3.3 Ejemplo: contar ocurrencias de palabras en fichero autónomo y shell interactivo](#33-ejemplo-contar-ocurrencias-de-palabras-en-nodo-autonomo-y-shell-interactivo)
+  * [3.4 Ejemplo: uso de jupyter notebook](#34-ejemplo-uso-de-jupyter-notebook)
+  * [3.5 Ejemplo: uso de jupyter notebook con cluster](#34-ejemplo-uso-de-jupyter-notebook-con-cluster)
 
 [Agradecimientos](#agradecimientos)
 
@@ -107,6 +109,13 @@ conda clean  --all
 </html>
 
 
+Alternativamente, es posible usar docker para la instalación, configuración y ejecución en un entorno simple:
+```
+docker run -it --rm -p 8888:8888 jupyter/pyspark-notebook
+```
+No obstante para estos ejemplos se usará PIP.
+
+
 ### 4. Instalación de Apache Spark
 
 Para instalar las dependencias puede ejecutar:
@@ -148,7 +157,7 @@ Pi is roughly 3.14246228492457
 
 ## Ejemplos para aprender
 
-### 5. Apache Spark en nodo autónomo y shell interactivo
+### 3.1 Apache Spark en nodo autónomo y shell interactivo
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
 ```
@@ -189,7 +198,7 @@ quit()
 También final de fichero (con las teclas control y D) debería de permitir finalizar la sesión con Apache Spark.
 
 
-### 6. Ejemplo: cálculo de pi en nodo autónomo y shell interactivo
+### 3.2 Ejemplo: cálculo de pi en nodo autónomo y shell interactivo
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
 ```
@@ -247,7 +256,7 @@ quit()
 ```
 
 
-### 7. Ejemplo: contar ocurrencias de palabras en fichero en nodo autónomo y shell interactivo
+### 3.3 Ejemplo: contar ocurrencias de palabras en fichero en nodo autónomo y shell interactivo
 
 Usaremos el quijote en texto plano para trabajar ([pg2000.txt](https://www.gutenberg.org/files/2000/2000-0.txt)) para lo que usaremos:
 ```
@@ -310,6 +319,85 @@ Para ver el resultado ejecutaremos:
 ```
 cat /home/lab/lab_spark/pg2000-w/part-00000
 ```
+
+
+### 3.4 Ejemplo: uso de jupyter notebook
+
+Debemos configurar pyspark para que use jupyter y notebook:
+```
+export PATH=$HOME/spark/bin:$PATH
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --no-browser'
+```
+
+Si ejecutamos pyspark:
+```
+pyspark
+```
+
+En la salida nos indica una URL en la que conectarnos:
+```
+[I 10:01:40.340 NotebookApp] Serving notebooks from local directory: /home/lab
+[I 10:01:40.340 NotebookApp] Jupyter Notebook 6.5.2 is running at:
+[I 10:01:40.340 NotebookApp] http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+[I 10:01:40.340 NotebookApp]  or http://127.0.0.1:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+[I 10:01:40.340 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 10:01:40.344 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home/lab/.local/share/jupyter/runtime/nbserver-13354-open.html
+    Or copy and paste one of these URLs:
+        http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+     or http://127.0.0.1:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+```
+
+Por lo que podemos usar con esta salida la URL:
+```
+http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+```
+Para conectarnos (estando en la misma red donde master es visible).
+
+
+
+### 3.5 Ejemplo: uso de jupyter notebook con cluster
+
+Se configura los workers de Spark:
+```
+echo "nodo1" >> spark/conf/workers
+echo "nodo2" >> spark/conf/workers
+```
+
+Todos los nodos han de poder comunicarse con SSH sin precisar clave, se recomienda este [tutorial de IBM](https://www.ibm.com/support/pages/configuring-ssh-login-without-password):
+```
+ssh-keygen -t rsa -P ""
+ssh-copy-id -i .ssh/id_rsa.pub lab@nodo1
+ssh-copy-id -i .ssh/id_rsa.pub lab@nodo2
+```
+
+Si no hay una cuenta compartida en todos los nodos entonces se copia el mismo Spark a todos los nodos:
+```
+scp –r spark acaldero@nodo[1-2]:~/
+```
+
+En el nodo master se arranca Spark:
+```
+./spark/sbin/start-all.sh
+```
+
+Para trabajar en una sesión de trabajo, podemos usar pyspark y el siguiente fragmento de código:
+```
+val spark = SparkSession.builder()
+            .appName("EjemploSpark")
+            .master("spark://master:7077")
+            .getOrCreate()
+```
+El [tutorial](https://towardsdatascience.com/how-to-connect-jupyter-notebook-to-remote-spark-clusters-and-run-spark-jobs-every-day-2c5a0c1b61df) muestra un entorno parecido.
+
+En el nodo master cuando se termine la sesión de trabajo se para Spark usando:
+```
+./spark/sbin/stop-all.sh
+```
+
 
 
 ## Bibliografía de ejemplos de Spark

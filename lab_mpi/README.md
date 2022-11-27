@@ -20,7 +20,8 @@
 
 3 Ejemplos para aprender:
   * [3.1 Hola mundo en MPI](#31-hola-mundo-en-mpi)
-  * [3.2 Cálculo de PI en MPI](#32-cálculo-de-pi-en-mpi)
+  * [3.2 Send y Receive en MPI](#32-send-y-receive-en-mpi)
+  * [3.3 Cálculo de PI en MPI](#33-cálculo-de-pi-en-mpi)
 
 [Agradecimientos](#agradecimientos)
 
@@ -168,7 +169,7 @@ cat <<EOF > machines
 ca
 EOF
 ```
-  * Ha de tener el ejecutable en todos los nodos:
+  * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
 scp hola nodo1:~/hola
 scp hola nodo2:~/hola
@@ -186,7 +187,72 @@ Hola mundo desde 'nodo2' (rank 3 de 4)
 ```
 
 
-### 3.2 Cálculo de PI en MPI
+### 3.2 Send y Receive en MPI
+
+#### 1. Editar
+
+Hay que editar un archivo [s-r.c](s-r.c) con un contenido similar a:
+``` C
+#include <stdio.h>
+#include "mpi.h"
+
+int main ( int argc, char **argv )
+{
+        int  node, size;
+        int  num = 10;
+        char name[255];
+        MPI_Status status;
+
+        MPI_Init(&argc,&argv);
+        MPI_Comm_size(MPI_COMM_WORLD, &size);
+        MPI_Comm_rank(MPI_COMM_WORLD, &node);
+
+        if (node == 0)
+           MPI_Send(&num, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        else
+           MPI_Recv(&num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+
+        MPI_Finalize();
+
+        return 0 ;
+}
+```
+
+
+#### 2. Compilar
+
+Para compilar hay que usar mpicc:
+``` bash
+mpicc -o s-r s-r.c -lm
+```
+
+
+#### 3. Ejecutar (remoto)
+
+Para ejecutar en dos nodos hay que hacer tres pasos:
+  * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
+``` bash
+cat <<EOF > machines
+nodo1
+nodo2
+EOF
+```
+  * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
+``` bash
+scp s-r nodo1:~/s-r
+scp s-r nodo2:~/s-r
+```
+  * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
+``` bash
+mpirun -np 2 -machinefile machines ~/s-r
+```
+La salida será:
+``` bash
+```
+Porque en la ejecución correcta del programa no se imprime nada.
+
+
+### 3.3 Cálculo de PI en MPI
 
 #### 1. Editar
 
@@ -257,7 +323,7 @@ nodo1
 nodo2
 EOF
 ```
-  * Ha de tener el ejecutable en todos los nodos:
+  * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
 scp pi nodo1:~/pi
 scp pi nodo2:~/pi
