@@ -358,6 +358,14 @@ http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=33f689de85205df46d687e568065e2ebf
 ```
 Para conectarnos (estando en la misma red donde master es visible).
 
+[This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+
+Una vez conectados+as estaremos en la [página inicial](jn01-intro.png)
+En la página inicial procederemos a [crear un nuevo notebook](jn02-new-notebook.png)
+En el nuevo libro tendremos una [nueva celda](jn03-new-cell.png)
+En la celda podemos copiar el [ejemplo de pi](jn04-pi.png)
+En una nueva celda podemos copiar el [número de palabras en local](jn05-pywc-local.png)
+En una nueva celda podemos copiar el [número de palabras en remoto](jn06-pywc-remote.png)
 
 
 ### 3.5 Ejemplo: uso de jupyter notebook con cluster
