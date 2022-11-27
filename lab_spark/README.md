@@ -265,7 +265,8 @@ wget -m https://www.gutenberg.org/files/2000/2000-0.txt
 
 Deberemos borrar cualquier resultado anterior de trabajo:
 ```
-rm -fr /home/lab/lab_spark/pg2000-w
+rm -fr   /home/lab/lab_spark/pg2000-w
+mkdir -p /home/lab/lab_spark/pg2000-w
 ```
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
@@ -353,7 +354,7 @@ En la salida nos indica una URL en la que conectarnos:
 
 Por lo que podemos usar con esta salida la URL:
 ```
-http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
 ```
 Para conectarnos (estando en la misma red donde master es visible).
 
@@ -392,6 +393,22 @@ val spark = SparkSession.builder()
             .getOrCreate()
 ```
 El [tutorial](https://towardsdatascience.com/how-to-connect-jupyter-notebook-to-remote-spark-clusters-and-run-spark-jobs-every-day-2c5a0c1b61df) muestra un entorno parecido.
+
+El programa cambia solo añadiendo ".master("spark://master:7077")" en nuestro ejemplo:
+```
+import sys
+from operator import add
+from pyspark.sql import SparkSession
+
+sc = SparkSession.builder.appName("pywc").master("spark://master:7077").getOrCreate()
+lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
+counts = lines.flatMap(lambda x: x.split(' ')) \
+              .map(lambda x: (x, 1)) \
+              .reduceByKey(add)
+output = counts.collect()
+counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
+sc.stop()
+```
 
 En el nodo master cuando se termine la sesión de trabajo se para Spark usando:
 ```
