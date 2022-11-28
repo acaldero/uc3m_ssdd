@@ -76,20 +76,20 @@ exit
 <tr>
 <td>Instalar Python3</td>
 <td>
-<small><pre class="m-0">
+<small><pre>
 sudo apt-get install \
      python3-minimal python3-pip
 </pre></small>
 </td>
 <td>
-<small><pre class="m-0">
-wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+<pre>
+wget <sub>https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh</sub>
 chmod a+x Anaconda3-2022.10-Linux-x86_64.sh
 ./Anaconda3-2022.10-Linux-x86_64.sh -b
 source ~/.profile
 conda update --all
 conda clean  --all
-</pre></small>
+</pre>
 </td>
 </tr>
 
