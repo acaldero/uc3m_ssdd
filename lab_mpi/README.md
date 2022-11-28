@@ -166,7 +166,8 @@ Para ejecutar en dos nodos hay que hacer tres pasos:
   * Ha de crearse un archivo machines con la lista de máquinas (una por línea) que van a ser usadas para ejecutar:
 ``` bash
 cat <<EOF > machines
-ca
+nodo1
+nodo2
 EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
@@ -208,9 +209,8 @@ int main ( int argc, char **argv )
         MPI_Comm_rank(MPI_COMM_WORLD, &node);
 
         if (node == 0)
-           MPI_Send(&num, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-        else
-           MPI_Recv(&num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+             MPI_Send(&num, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        else MPI_Recv(&num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
 
         MPI_Finalize();
 
@@ -348,6 +348,9 @@ Enter the number of intervals: (0 quits) 1000000
 pi is approximately 3.1415926535899388, Error is 0.0000000000001457
 Enter the number of intervals: (0 quits) 0
 ```
+
+Agradecer a Lucas la pregunta de qué pasa con 1000000000000 (12 ceros).
+Con 13 ceros parece funcionar, pero es posible que haya overflow/underflow en algún cálculo a partir de un número alto de intervalos.
 
 
 ## Bibliografía de ejemplos de MPI
