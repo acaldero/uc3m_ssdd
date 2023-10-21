@@ -3,7 +3,7 @@
 <html>
 <ul>
 <li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
-<li> Curso 2022-2023</li>
+<li> Curso 2023-2024</li>
 </ul>
 </html>
 
