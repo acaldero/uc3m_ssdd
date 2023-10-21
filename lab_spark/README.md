@@ -82,9 +82,9 @@ sudo apt-get install \
 </td>
 <td>
 <pre>
-wget <sub>https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh</sub>
-chmod a+x Anaconda3-2022.10-Linux-x86_64.sh
-./Anaconda3-2022.10-Linux-x86_64.sh -b
+wget <sub>https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh</sub>
+chmod a+x Anaconda3-2023.09-0-Linux-x86_64.sh
+./Anaconda3-2023.09-0-Linux-x86_64.sh -b
 source ~/.profile
 conda update --all
 conda clean  --all

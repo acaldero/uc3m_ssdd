@@ -42,6 +42,7 @@ exit
 * Para estos casos se usa un sistema de trabajos en cola, que se encarga de asignar nodos durante un tiempo limitado a las personas que lo usen para que puedan trabajar en exclusividad si lo precisan.
 
 #### 2.1 Lanzar un trabajo en la cola
+<ol type="a">
   a. Compruebe primero que está conectado a avignon.lab.inf.uc3m.es (que es el nodo front-end o nodo de cabecera)
   
   b. Ha de crear un script con todo lo que quiera ejecutar en ese trabajo encolado.
@@ -77,8 +78,11 @@ cat slurm-XXX.out
 ```
 scancel 555
 ```
+</ol>
+
 
 #### 2.2 Pedir un trabajo interactivo
+<ol type="a">
   a. Compruebe primero que está conectado a avignon.lab.inf.uc3m.es (que es el nodo front-end o nodo de cabecera)
   
   b. Ha de solicitar una sesión interactiva (es útil para depurar o trabajos cortos interactivos):
@@ -95,6 +99,58 @@ hostname
 ```
 exit
 ```
+</ol>
+
+
+#### 2.3 Selección de software específico a usar en el trabajo
+  Es posible que haya disponible distintas implementaciones de un software instaladas, y varias versiones de cada implementación.
+  Por ejemplo, si hay disponible distintos compiladores de C (gcc, clang, etc.) y varias versiones de alguno de ellos (gcc 10, gcc 12, etc.).<br/>
+  Para poder seleccionar qué software y qué versión queremos usar para un trabajo particular de entre los disponibles se utiliza el programa **module**.
+
+<ol type="a">
+  a. Compruebe primero que software está disponible en avignon.lab.inf.uc3m.es (que es el nodo front-end o nodo de cabecera) o en el nodo interactivo con **module available**:
+```
+module avail
+```
+Y la salida podría ser:
+```
+dot  gcc/12.1.0  module-info  modules
+```
+
+  b. De la lista de software disponible, si queremos usar por ejemplo **gcc/12.1.0** hay que usar la opción **load**:
+```
+module load gcc/12.1.0
+```
+
+  c. Para listar el software ya cargado hay que usar la opción **list**:
+```
+module list
+```
+Y la salida podría ser:
+```
+Currently Loaded Modulefiles:
+ 1) gcc/12.1.0
+```
+
+  d. Para dejar de usar un software concreto que previamente se había cargado hay que usar la opción **unload**:
+```
+module unload gcc/12.1.0
+```
+
+  e. El siguiente ejemplo muestra cómo es posible añadir el uso de **module** a los trabajos en la cola:
+```
+#!/bin/sh
+
+# Actualizar variables de entorno definidas en /etc/profile
+.  /etc/profile
+
+# Cargar gcc/12.1.0
+module load gcc/12.1.0
+
+# Ejemplo de compilar con gcc un archivo main.c
+gcc -Wall -g -O2 -o main main.c
+```
+</ol>
 
 
 ### 3. Ejecución de aplicación paralela en el sistema de colas de avignon.lab.inf.uc3m.es
@@ -103,6 +159,7 @@ exit
 * Todos los procesos ejecutando a la vez forman una aplicación MPI paralela.
 
 #### 3.1 Lanzar un trabajo paralelo en la cola
+<ol type="a">
   a. Compruebe primero que está conectado a avignon.lab.inf.uc3m.es (que es el nodo front-end o nodo de cabecera)
   
   b. Ha de crear un script con la orden de necesaria para ejecutar el trabajo paralelo.
@@ -147,5 +204,6 @@ cat slurm-XXX.out
 ```
 scancel 555
 ```
+</ol>
 
 

@@ -78,9 +78,9 @@ sudo apt-get install \
 </td>
 <td>
 <pre>
-wget <sub>https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh</sub>
-chmod a+x Anaconda3-2022.10-Linux-x86_64.sh
-./Anaconda3-2022.10-Linux-x86_64.sh -b
+wget <sub>https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh</sub>
+chmod a+x Anaconda3-2023.09-0-Linux-x86_64.sh
+./Anaconda3-2023.09-0-Linux-x86_64.sh -b
 source ~/.profile
 conda update --all
 conda clean  --all
@@ -88,27 +88,11 @@ conda clean  --all
 </td>
 </tr>
 
-<tr>
-<td>Instalar jupyter</td>
-<td><pre>sudo apt-get install jupyter-notebook</pre></td>
-<td><pre>conda install jupyter</pre></td>
-</tr>
-
-<tr>
-<td>Prueba básica</td>
-<td colspan="1"><pre>jupyter notebook</pre></td>
-<td colspan="1"><pre>jupyter notebook</pre></td>
-</tr>
-
 </table>
 </html>
 
 
-Alternativamente, es posible usar docker para la instalación, configuración y ejecución en un entorno simple:
-```
-docker run -it --rm -p 8888:8888 jupyter/pyspark-notebook
-```
-No obstante para estos ejemplos se usará PIP.
+No obstante para los ejemplos se usará PIP.
 
 
 ## Ejemplos para aprender
@@ -119,7 +103,8 @@ No obstante para estos ejemplos se usará PIP.
 
 Hay que introducir:
 ```
-cd tf-checkpoint
+cd lab_checkpoint
+chmod a+x *.sh
 ./run.sh
 ```
 
@@ -169,12 +154,6 @@ iter:  9
 
 </table>
 </html>
-
-
-## Bibliografía de ejemplos de Spark
-
-* [Ejemplos iniciales de uso de Spark](https://spark.apache.org/examples.html)
-* [Ejemplos en python](https://github.com/apache/spark/tree/master/examples/src/main/python)
 
 
 ## Agradecimientos
