@@ -1,4 +1,4 @@
-## Materiales para Sistemas Distribuidos
+## Materiales para Sistemas Paralelos y Distribuidos
 
 <html>
 <ul>
@@ -85,6 +85,7 @@ sudo apt-get install \
 wget <sub>https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh</sub>
 chmod a+x Anaconda3-2023.09-0-Linux-x86_64.sh
 ./Anaconda3-2023.09-0-Linux-x86_64.sh -b
+echo "PATH=\"\$HOME/anaconda3/bin:\$PATH\"" >> .profile
 source ~/.profile
 conda update --all
 conda clean  --all

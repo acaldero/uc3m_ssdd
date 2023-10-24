@@ -1,4 +1,4 @@
-## Materiales para Sistemas Distribuidos
+## Materiales para Sistemas Paralelos y Distribuidos
 
 <html>
 <ul>
