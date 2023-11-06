@@ -87,8 +87,10 @@ chmod a+x Anaconda3-2023.09-0-Linux-x86_64.sh
 ./Anaconda3-2023.09-0-Linux-x86_64.sh -b
 echo "PATH=\"\$HOME/anaconda3/bin:\$PATH\"" >> .profile
 source ~/.profile
-conda update --all
-conda clean  --all
+conda update --all -y
+conda clean  --all -y
+conda create -n py310 python=3.10
+conda activate py310
 </pre>
 </td>
 </tr>
@@ -96,7 +98,7 @@ conda clean  --all
 <tr>
 <td>Instalar jupyter</td>
 <td><pre>sudo apt-get install jupyter-notebook</pre></td>
-<td><pre>conda install jupyter</pre></td>
+<td><pre>conda install jupyter py4j gxx_linux-64</pre></td>
 </tr>
 
 <tr>
@@ -126,9 +128,9 @@ sudo apt-get install ssh rsync default-jdk
 Para instalar Apache Spark en su cuenta personal puede ejecutar:
 ```
 cd $HOME
-wget https://www.apache.org/dyn/closer.lua/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3.tgz
-tar zxf spark-3.3.1-bin-hadoop3.tgz
-ln   -s spark-3.3.1-bin-hadoop3  spark
+wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+tar zxf spark-3.5.0-bin-hadoop3.tgz
+ln   -s spark-3.5.0-bin-hadoop3  spark
 ```
 
 La prueba básica de que funciona la instalación es:
@@ -138,20 +140,27 @@ La prueba básica de que funciona la instalación es:
 Debería de ver una salida como la siguiente:
 ```
 ...
-22/11/24 19:20:04 INFO SparkContext: Running Spark version 3.3.0
+23/11/06 19:39:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+23/11/06 19:39:34 INFO SparkContext: Running Spark version 3.3.0
 ...
-22/11/24 19:20:07 INFO DAGScheduler: Job 0 finished: reduce at SparkPi.scala:38, took 0.851307 s
-Pi is roughly 3.14246228492457
-22/11/24 19:20:07 INFO SparkUI: Stopped Spark web UI at http://master:4040
-22/11/24 19:20:07 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-22/11/24 19:20:07 INFO MemoryStore: MemoryStore cleared
-22/11/24 19:20:07 INFO BlockManager: BlockManager stopped
-22/11/24 19:20:07 INFO BlockManagerMaster: BlockManagerMaster stopped
-22/11/24 19:20:07 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-22/11/24 19:20:07 INFO SparkContext: Successfully stopped SparkContext
-22/11/24 19:20:08 INFO ShutdownHookManager: Shutdown hook called
-22/11/24 19:20:08 INFO ShutdownHookManager: Deleting directory /tmp/spark-5d7bb31d-80e7-4268-ae61-c9e5f30a5344
-22/11/24 19:20:08 INFO ShutdownHookManager: Deleting directory /tmp/spark-4952b716-43c1-4d45-8e6b-7fa454fec4a2
+23/11/06 19:39:37 INFO Executor: Finished task 4.0 in stage 0.0 (TID 4). 965 bytes result sent to driver
+23/11/06 19:39:37 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 29 ms on master (executor driver) (5/5)
+23/11/06 19:39:37 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+23/11/06 19:39:37 INFO DAGScheduler: ResultStage 0 (reduce at SparkPi.scala:38) finished in 0.721 s
+23/11/06 19:39:37 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+23/11/06 19:39:37 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
+23/11/06 19:39:37 INFO DAGScheduler: Job 0 finished: reduce at SparkPi.scala:38, took 0.811302 s
+Pi is roughly 3.143214286428573
+23/11/06 19:39:37 INFO SparkUI: Stopped Spark web UI at http://master:4040
+23/11/06 19:39:37 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+23/11/06 19:39:37 INFO MemoryStore: MemoryStore cleared
+23/11/06 19:39:37 INFO BlockManager: BlockManager stopped
+23/11/06 19:39:37 INFO BlockManagerMaster: BlockManagerMaster stopped
+23/11/06 19:39:37 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+23/11/06 19:39:37 INFO SparkContext: Successfully stopped SparkContext
+23/11/06 19:39:37 INFO ShutdownHookManager: Shutdown hook called
+23/11/06 19:39:37 INFO ShutdownHookManager: Deleting directory /tmp/spark-884729c2-f718-4e64-b580-2dabf8f90b7d
+23/11/06 19:39:37 INFO ShutdownHookManager: Deleting directory /tmp/spark-605c2a10-8958-4ca2-a13b-e4943312c7d3
 ```
 
 
@@ -172,7 +181,7 @@ Donde el parámetro de "--master" puede ser:
 
 Tras ejecutar pyspark como se ha indicado anteriormente, la salida debería ser parecida a:
 ```
-Python 3.10.6 (main, Nov  2 2022, 18:53:38) [GCC 11.3.0] on linux
+Python 3.11.5 (main, Sep 11 2023, 13:54:46) [GCC 11.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -184,9 +193,9 @@ Welcome to
    /__ / .__/\_,_/_/ /_/\_\   version 3.3.0
       /_/
 
-Using Python version 3.10.6 (main, Nov  2 2022 18:53:38)
+Using Python version 3.11.5 (main, Sep 11 2023 13:54:46)
 Spark context Web UI available at http://master:4040
-Spark context available as 'sc' (master = local[*], app id = local-1669315623573).
+Spark context available as 'sc' (master = local[2], app id = local-1699296762876).
 SparkSession available as 'spark'.
 >>>
 ```
@@ -242,12 +251,12 @@ Tras introducir el código y dar enter se ejecutará, y la salida debería ser p
 ... 
 >>> spark = SparkSession.builder.appName("PythonPi").getOrCreate()
 
-22/11/26 20:42:12 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+23/11/06 19:54:59 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 >>> count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
->>> print("Pi is roughly %f" % (4.0 * count / n))                               
-Pi is roughly 3.138680
+>>> print("Pi is roughly %f" % (4.0 * count / n))
+Pi is roughly 3.138760
 >>> spark.stop()
->>> 
+>>>
 ```
 
 Para terminar la sesión ejecutaremos:
@@ -260,13 +269,12 @@ quit()
 
 Usaremos el quijote en texto plano para trabajar ([pg2000.txt](https://www.gutenberg.org/files/2000/2000-0.txt)) para lo que usaremos:
 ```
-wget -m https://www.gutenberg.org/files/2000/2000-0.txt
+curl https://www.gutenberg.org/files/2000/2000-0.txt  -o $HOME/lab_spark/2000-0.txt
 ```
 
 Deberemos borrar cualquier resultado anterior de trabajo:
 ```
 rm -fr   /home/lab/lab_spark/pg2000-w
-mkdir -p /home/lab/lab_spark/pg2000-w
 ```
 
 Para trabajar con un shell interactivo en un nodo autónomo hay que ejecutar:
@@ -300,13 +308,13 @@ Tras introducir el código y dar enter se ejecutará, y la salida debería ser p
 >>> 
 >>> sc = SparkSession.builder.appName("pywc").getOrCreate()
 
-22/11/26 20:44:30 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+23/11/06 19:59:38 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 >>> lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
 >>> counts = lines.flatMap(lambda x: x.split(' ')) \
 ...               .map(lambda x: (x, 1)) \
 ...               .reduceByKey(add)
 >>> output = counts.collect()
->>> counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")                       
+>>> counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
 >>> sc.stop()
 >>>
 ```
@@ -338,23 +346,23 @@ pyspark
 
 En la salida nos indica una URL en la que conectarnos:
 ```
-[I 10:01:40.340 NotebookApp] Serving notebooks from local directory: /home/lab
-[I 10:01:40.340 NotebookApp] Jupyter Notebook 6.5.2 is running at:
-[I 10:01:40.340 NotebookApp] http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
-[I 10:01:40.340 NotebookApp]  or http://127.0.0.1:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
-[I 10:01:40.340 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[C 10:01:40.344 NotebookApp]
+[I 20:00:53.903 NotebookApp] Serving notebooks from local directory: /home/lab
+[I 20:00:53.903 NotebookApp] Jupyter Notebook 6.5.2 is running at:
+[I 20:00:53.903 NotebookApp] http://master:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+[I 20:00:53.903 NotebookApp]  or http://127.0.0.1:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+[I 20:00:53.903 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 20:00:53.907 NotebookApp]
 
     To access the notebook, open this file in a browser:
-        file:///home/lab/.local/share/jupyter/runtime/nbserver-13354-open.html
+        file:///home/lab/.local/share/jupyter/runtime/nbserver-97145-open.html
     Or copy and paste one of these URLs:
-        http://master:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
-     or http://127.0.0.1:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+        http://master:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+     or http://127.0.0.1:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
 ```
 
 Por lo que podemos usar con esta salida la URL:
 ```
-http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=33f689de85205df46d687e568065e2ebfaebfcadddb65abb
+http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
 ```
 Para conectarnos (estando en la misma red donde master es visible).
 
@@ -383,7 +391,7 @@ ssh-copy-id -i .ssh/id_rsa.pub lab@nodo2
 
 Si no hay una cuenta compartida en todos los nodos entonces se copia el mismo Spark a todos los nodos:
 ```
-scp –r spark acaldero@nodo[1-2]:~/
+scp –r spark lab@nodo[1-2]:~/
 ```
 
 En el nodo master se arranca Spark:

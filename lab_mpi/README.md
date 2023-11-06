@@ -172,8 +172,8 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
-scp hola nodo1:~/hola
-scp hola nodo2:~/hola
+scp hola nodo1:~/lab_mpi/hola
+scp hola nodo2:~/lab_mpi/hola
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash

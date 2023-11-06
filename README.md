@@ -25,7 +25,7 @@ Se recomienda tener acceso a tres ordenadores interconectados entre ellos con SS
 
 Para seguir los laboratorios se precisa que, en cualquier caso, los ordenadores tengan:
 * Instalada una distribución Linux Ubuntu 22.04 LTS o compatible.
-* Al menos 2 GiB de RAM y 20 GiB de disco duro.
+* Al menos 2 GiB de RAM y 24 GiB de disco duro.
 * Acceso por SSH.
 
 
