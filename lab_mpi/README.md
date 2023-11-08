@@ -172,6 +172,8 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
+ssh nodo1 mkdir ~/lab_mpi
+ssh nodo2 mkdir ~/lab_mpi
 scp hola nodo1:~/lab_mpi/hola
 scp hola nodo2:~/lab_mpi/hola
 ```
@@ -239,8 +241,8 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
-scp s-r nodo1:~/s-r
-scp s-r nodo2:~/s-r
+scp s-r nodo1:~/lab_mpi/s-r
+scp s-r nodo2:~/lab_mpi/s-r
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
@@ -325,8 +327,8 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
-scp pi nodo1:~/pi
-scp pi nodo2:~/pi
+scp pi nodo1:~/lab_mpi/pi
+scp pi nodo2:~/lab_mpi/pi
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash

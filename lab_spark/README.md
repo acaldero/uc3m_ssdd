@@ -63,13 +63,14 @@ exit
 
 ### 2.1 Instalación de Python
 
+Para los ejemplos usaremos PIP.
+
 <html>
 <table>
 
 <tr>
 <td></td>
 <td>Uso de PIP</td>
-<td>Uso de Anaconda</td>
 </tr>
 
 <tr>
@@ -80,42 +81,21 @@ sudo apt-get install \
      python3-minimal python3-pip
 </pre></small>
 </td>
-<td>
-<pre>
-wget <sub>https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh</sub>
-chmod a+x Anaconda3-2023.09-0-Linux-x86_64.sh
-./Anaconda3-2023.09-0-Linux-x86_64.sh -b
-echo "PATH=\"\$HOME/anaconda3/bin:\$PATH\"" >> .profile
-source ~/.profile
-conda update --all -y
-conda clean  --all -y
-conda create -n py310 python=3.10
-conda activate py310
-</pre>
-</td>
 </tr>
 
 <tr>
-<td>Instalar jupyter</td>
-<td><pre>sudo apt-get install jupyter-notebook</pre></td>
-<td><pre>conda install jupyter py4j gxx_linux-64</pre></td>
+<td>Soporte para jupyter</td>
+<td><pre>sudo apt-get install jupyter-notebook py4j</pre></td>
 </tr>
 
 <tr>
 <td>Prueba básica</td>
-<td colspan="1"><pre>jupyter notebook</pre></td>
 <td colspan="1"><pre>jupyter notebook</pre></td>
 </tr>
 
 </table>
 </html>
 
-
-Alternativamente, es posible usar docker para la instalación, configuración y ejecución en un entorno simple:
-```
-docker run -it --rm -p 8888:8888 jupyter/pyspark-notebook
-```
-No obstante para estos ejemplos se usará PIP.
 
 
 ### 2.2 Instalación de Apache Spark
@@ -389,9 +369,10 @@ ssh-copy-id -i .ssh/id_rsa.pub lab@nodo1
 ssh-copy-id -i .ssh/id_rsa.pub lab@nodo2
 ```
 
-Si no hay una cuenta compartida en todos los nodos entonces se copia el mismo Spark a todos los nodos:
+Si no hay una cuenta compartida en todos los nodos entonces hay que asegurarse que se tiene la misma copia de Spark en todos los nodos:
 ```
-scp –r spark lab@nodo[1-2]:~/
+scp –r spark lab@nodo1:~/
+scp –r spark lab@nodo2:~/
 ```
 
 En el nodo master se arranca Spark:
