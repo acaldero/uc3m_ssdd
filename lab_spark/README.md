@@ -79,13 +79,14 @@ Para los ejemplos usaremos PIP.
 <small><pre>
 sudo apt-get install \
      python3-minimal python3-pip
+sudo pip install py4j
 </pre></small>
 </td>
 </tr>
 
 <tr>
 <td>Soporte para jupyter</td>
-<td><pre>sudo apt-get install jupyter-notebook py4j</pre></td>
+<td><pre>sudo apt-get install jupyter-notebook</pre></td>
 </tr>
 
 <tr>
@@ -389,7 +390,7 @@ val spark = SparkSession.builder()
 ```
 El [tutorial](https://towardsdatascience.com/how-to-connect-jupyter-notebook-to-remote-spark-clusters-and-run-spark-jobs-every-day-2c5a0c1b61df) muestra un entorno parecido.
 
-El programa cambia solo añadiendo ".master("spark://master:7077")" en nuestro ejemplo:
+El programa cambia solo añadiendo ".master("spark://master:7077")" en nuestro ejemplo (recuerde tener borrado ~/lab_spark/pg2000-w antes):
 ```
 import sys
 from operator import add

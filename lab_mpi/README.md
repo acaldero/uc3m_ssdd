@@ -139,6 +139,7 @@ int main(int argc, char** argv)
 
 Para compilar hay que usar mpicc:
 ``` bash
+cd ~/lab_mpi
 mpicc -g -Wall -c hola.c -o hola.o
 mpicc -g -Wall -o hola hola.o
 ```
@@ -172,14 +173,14 @@ EOF
 ```
   * Ha de tener el ejecutable en todos los nodos (si no se tiene un directorio de cuenta compartido en las máquinas):
 ``` bash
-ssh nodo1 mkdir ~/lab_mpi
-ssh nodo2 mkdir ~/lab_mpi
+ssh nodo1 mkdir -p ~/lab_mpi
+ssh nodo2 mkdir -p ~/lab_mpi
 scp hola nodo1:~/lab_mpi/hola
 scp hola nodo2:~/lab_mpi/hola
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 4 -machinefile machines ~/hola
+mpirun -np 4 -machinefile machines ~/lab_mpi/hola
 ```
 La salida será:
 ``` bash
@@ -246,7 +247,7 @@ scp s-r nodo2:~/lab_mpi/s-r
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 2 -machinefile machines ~/s-r
+mpirun -np 2 -machinefile machines ~/lab_mpi/s-r
 ```
 La salida será:
 ``` bash
@@ -332,7 +333,7 @@ scp pi nodo2:~/lab_mpi/pi
 ```
   * Ha de lanzarse la ejecución en las máquinas deseadas usando mpirun:
 ``` bash
-mpirun -np 2 -machinefile machines ~/pi
+mpirun -np 2 -machinefile machines ~/lab_mpi/pi
 ```
 La salida será:
 ``` bash
