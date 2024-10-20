@@ -3,7 +3,7 @@
 <html>
 <ul>
 <li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
-<li> Curso 2023-2024</li>
+<li> Curso 2024-2025</li>
 </ul>
 </html>
 
@@ -101,15 +101,19 @@ No obstante para los ejemplos se usará PIP.
 
 #### Preparación
 
-Hay que introducir:
+Si no tiene el directorio *lab_checkpoint* entonces se puede ejecutar:
+```
+git clone https://github.com/acaldero/uc3m_ssdd.git
+cd uc3m_ssdd/
+```
+Si tiene el directorio *lab_checkpoint* entonces hay que introducir:
 ```
 cd lab_checkpoint
 chmod a+x *.sh
-./run.sh
 ```
 
 
-#### Ejecutar
+#### Ejecutar el ejemplo
 
 <html>
 <table>

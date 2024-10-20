@@ -3,7 +3,7 @@
 <html>
 <ul>
 <li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
-<li> Curso 2023-2024</li>
+<li> Curso 2024-2025</li>
 </ul>
 </html>
 
@@ -159,7 +159,11 @@ EOF
 ``` bash
 mpirun -np 2 -machinefile machines ./hola
 ```
-
+La salida podría ser:
+``` bash
+Hola mundo desde 'master' (rank 1 de 2)
+Hola mundo desde 'master' (rank 0 de 2)
+```
 
 #### 4. Ejecutar en nodos remotos
 
@@ -182,12 +186,12 @@ scp hola nodo2:~/lab_mpi/hola
 ``` bash
 mpirun -np 4 -machinefile machines ~/lab_mpi/hola
 ```
-La salida será:
+La salida podría ser:
 ``` bash
-Hola mundo desde 'nodo2' (rank 1 de 4)
-Hola mundo desde 'nodo1' (rank 0 de 4)
-Hola mundo desde 'nodo1' (rank 2 de 4)
 Hola mundo desde 'nodo2' (rank 3 de 4)
+Hola mundo desde 'nodo1' (rank 0 de 4)
+Hola mundo desde 'nodo2' (rank 1 de 4)
+Hola mundo desde 'nodo1' (rank 2 de 4)
 ```
 
 

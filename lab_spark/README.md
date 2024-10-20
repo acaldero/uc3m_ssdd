@@ -3,7 +3,7 @@
 <html>
 <ul>
 <li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
-<li> Curso 2023-2024</li>
+<li> Curso 2024-2025</li>
 </ul>
 </html>
 
@@ -120,28 +120,26 @@ La prueba básica de que funciona la instalación es:
 ```
 Debería de ver una salida como la siguiente:
 ```
+24/10/20 12:18:30 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 ...
-23/11/06 19:39:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-23/11/06 19:39:34 INFO SparkContext: Running Spark version 3.3.0
+24/10/20 12:18:32 INFO SparkContext: Starting job: reduce at SparkPi.scala:38
+24/10/20 12:18:32 INFO DAGScheduler: Got job 0 (reduce at SparkPi.scala:38) with 5 output partitions
 ...
-23/11/06 19:39:37 INFO Executor: Finished task 4.0 in stage 0.0 (TID 4). 965 bytes result sent to driver
-23/11/06 19:39:37 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 29 ms on master (executor driver) (5/5)
-23/11/06 19:39:37 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
-23/11/06 19:39:37 INFO DAGScheduler: ResultStage 0 (reduce at SparkPi.scala:38) finished in 0.721 s
-23/11/06 19:39:37 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
-23/11/06 19:39:37 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
-23/11/06 19:39:37 INFO DAGScheduler: Job 0 finished: reduce at SparkPi.scala:38, took 0.811302 s
-Pi is roughly 3.143214286428573
-23/11/06 19:39:37 INFO SparkUI: Stopped Spark web UI at http://master:4040
-23/11/06 19:39:37 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-23/11/06 19:39:37 INFO MemoryStore: MemoryStore cleared
-23/11/06 19:39:37 INFO BlockManager: BlockManager stopped
-23/11/06 19:39:37 INFO BlockManagerMaster: BlockManagerMaster stopped
-23/11/06 19:39:37 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-23/11/06 19:39:37 INFO SparkContext: Successfully stopped SparkContext
-23/11/06 19:39:37 INFO ShutdownHookManager: Shutdown hook called
-23/11/06 19:39:37 INFO ShutdownHookManager: Deleting directory /tmp/spark-884729c2-f718-4e64-b580-2dabf8f90b7d
-23/11/06 19:39:37 INFO ShutdownHookManager: Deleting directory /tmp/spark-605c2a10-8958-4ca2-a13b-e4943312c7d3
+24/10/20 12:18:32 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+24/10/20 12:18:32 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
+24/10/20 12:18:32 INFO DAGScheduler: Job 0 finished: reduce at SparkPi.scala:38, took 0.458716 s
+Pi is roughly 3.143406286812574
+24/10/20 12:18:32 INFO SparkContext: SparkContext is stopping with exitCode 0.
+24/10/20 12:18:32 INFO SparkUI: Stopped Spark web UI at http://master:4040
+24/10/20 12:18:33 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+24/10/20 12:18:33 INFO MemoryStore: MemoryStore cleared
+24/10/20 12:18:33 INFO BlockManager: BlockManager stopped
+24/10/20 12:18:33 INFO BlockManagerMaster: BlockManagerMaster stopped
+24/10/20 12:18:33 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+24/10/20 12:18:33 INFO SparkContext: Successfully stopped SparkContext
+24/10/20 12:18:33 INFO ShutdownHookManager: Shutdown hook called
+24/10/20 12:18:33 INFO ShutdownHookManager: Deleting directory /tmp/spark-aa764165-433d-4601-9365-ee5c1b6c5b82
+24/10/20 12:18:33 INFO ShutdownHookManager: Deleting directory /tmp/spark-0bc7c845-d7ac-43c7-874a-1e8bdb86a92d
 ```
 
 
@@ -162,7 +160,7 @@ Donde el parámetro de "--master" puede ser:
 
 Tras ejecutar pyspark como se ha indicado anteriormente, la salida debería ser parecida a:
 ```
-Python 3.11.5 (main, Sep 11 2023, 13:54:46) [GCC 11.2.0] on linux
+Python 3.10.12 (main, Sep 11 2024, 15:47:36) [GCC 11.4.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -171,12 +169,12 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /__ / .__/\_,_/_/ /_/\_\   version 3.3.0
+   /__ / .__/\_,_/_/ /_/\_\   version 3.5.0
       /_/
 
-Using Python version 3.11.5 (main, Sep 11 2023 13:54:46)
+Using Python version 3.10.12 (main, Sep 11 2024 15:47:36)
 Spark context Web UI available at http://master:4040
-Spark context available as 'sc' (master = local[2], app id = local-1699296762876).
+Spark context available as 'sc' (master = local[2], app id = local-1729426762360).
 SparkSession available as 'spark'.
 >>>
 ```
@@ -222,20 +220,20 @@ Tras introducir el código y dar enter se ejecutará, y la salida debería ser p
 >>> from random import random
 >>> from operator import add
 >>> from pyspark.sql import SparkSession
->>> 
+>>>
 >>> partitions = 2
 >>> n = 100000 * partitions
 >>> def f(_):
 ...    x = random() * 2 - 1
 ...    y = random() * 2 - 1
 ...    return 1 if x ** 2 + y ** 2 < 1 else 0
-... 
+...
 >>> spark = SparkSession.builder.appName("PythonPi").getOrCreate()
 
-23/11/06 19:54:59 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+24/10/20 12:19:33 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 >>> count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
 >>> print("Pi is roughly %f" % (4.0 * count / n))
-Pi is roughly 3.138760
+Pi is roughly 3.132920
 >>> spark.stop()
 >>>
 ```
@@ -286,10 +284,10 @@ Tras introducir el código y dar enter se ejecutará, y la salida debería ser p
 >>> import sys
 >>> from operator import add
 >>> from pyspark.sql import SparkSession
->>> 
+>>>
 >>> sc = SparkSession.builder.appName("pywc").getOrCreate()
 
-23/11/06 19:59:38 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+24/10/20 12:20:27 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 >>> lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
 >>> counts = lines.flatMap(lambda x: x.split(' ')) \
 ...               .map(lambda x: (x, 1)) \
@@ -410,7 +408,6 @@ En el nodo master cuando se termine la sesión de trabajo se para Spark usando:
 ```
 ./spark/sbin/stop-all.sh
 ```
-
 
 
 ## Bibliografía de ejemplos de Spark

@@ -3,7 +3,7 @@
 <html>
 <ul>
 <li> License <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">GNU LGPL 2.1</a> </li>
-<li> Curso 2022-2023</li>
+<li> Curso 2024-2025</li>
 </ul>
 </html>
 
