@@ -109,9 +109,15 @@ sudo apt-get install ssh rsync default-jdk
 Para instalar Apache Spark en su cuenta personal puede ejecutar:
 ```
 cd $HOME
-wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
-tar zxf spark-3.5.0-bin-hadoop3.tgz
-ln   -s spark-3.5.0-bin-hadoop3  spark
+wget https://dlcdn.apache.org/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz
+tar zxf spark-3.5.3-bin-hadoop3.tgz
+ln   -s spark-3.5.3-bin-hadoop3  spark
+```
+
+Después de instalar, hay que configurar dos variables de entorno para usar Apache Spark:
+```
+export SPARK_HOME=$HOME/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ```
 
 La prueba básica de que funciona la instalación es:
