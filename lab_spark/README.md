@@ -15,8 +15,8 @@
   * [1.2 Conexión SSH con las máquinas de trabajo](#12-conexi%C3%B3n-ssh-con-las-m%C3%A1quinas-de-trabajo)
 
 2 Software necesario:
-  * [2.1 Instalación de Python](21-instalaci%C3%B3n-de-python)
-  * [2.2 Instalación de Apache Spark](22-instalaci%C3%B3n-de-apache-spark)
+  * [2.1 Instalación de Python](#21-instalaci%C3%B3n-de-python-y-pip) 
+  * [2.2 Instalación de Apache Spark](#22-instalaci%C3%B3n-de-apache-spark)
 
 3 Ejemplos para aprender:
   * [3.1 Apache Spark en nodo autónomo y shell interactivo](#31-apache-spark-en-nodo-aut%C3%B3nomo-y-shell-interactivo)
@@ -38,9 +38,12 @@
   3. Estar conectado dentro de la red de la Universidad, ya sea con VPN o con conexión a través de guernika.lab.inf.uc3m.es.
 
 * Como ayuda:
-  1. Para solicitar la apertura de cuenta siga los pasos indicados en: https://www.lab.inf.uc3m.es/servicios/apertura-de-cuenta/
-  2. El Laboratorio del Departamento de Informática dispone de un manual de MobaXterm en: https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
-  3. La información de VPN para la Universidad está en: https://www.uc3m.es/sdic/servicios/vpn
+  1. Para solicitar la apertura de cuenta siga los pasos indicados en:  
+     https://www.lab.inf.uc3m.es/servicios/apertura-de-cuenta/
+  3. El Laboratorio del Departamento de Informática dispone de un manual de MobaXterm en:  
+     https://www.lab.inf.uc3m.es/wp-content/docs/Manual_ConexionSSH.pdf
+  5. La información de VPN para la Universidad está en:  
+     https://www.uc3m.es/sdic/servicios/vpn
 
 
 ### 1.2 Conexión SSH con las máquinas de trabajo
@@ -53,7 +56,7 @@
   ...
   ```
 
-* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta usando el mandato exit:
+* Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta usando el mandato **exit**:
   ```
   exit
   ```
@@ -61,9 +64,9 @@
 
 ## Software necesario
 
-### 2.1 Instalación de Python
+### 2.1 Instalación de Python (y PIP)  
 
-* Para los ejemplos usaremos PIP.
+*  
   <html>
   <table>
   <tr>
@@ -74,8 +77,7 @@
   <td>Instalar Python3</td>
   <td>
   <small><pre>
-  sudo apt-get install \
-       python3-minimal python3-pip
+  sudo apt-get install python3-minimal python3-pip
   sudo pip install py4j
   </pre></small>
   </td>
