@@ -317,103 +317,122 @@ cat /home/lab/lab_spark/pg2000-w/part-00000
 
 ### 3.4 Ejemplo: uso de jupyter notebook
 
-Debemos configurar pyspark para que use jupyter y notebook:
-```
-export PATH=$HOME/spark/bin:$PATH
-export PYSPARK_DRIVER_PYTHON=jupyter
-export PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --no-browser'
-```
+* Debemos configurar pyspark para que use jupyter y notebook:
+  ```
+  export PATH=$HOME/spark/bin:$PATH
+  export PYSPARK_DRIVER_PYTHON=jupyter
+  export PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --no-browser'
+  ```
 
-Si ejecutamos pyspark:
-```
-pyspark
-```
+* A continuación debemos ejecutamos *pyspark*:
+  ```
+  pyspark
+  ```
 
-En la salida nos indica una URL en la que conectarnos:
-```
-[I 20:00:53.903 NotebookApp] Serving notebooks from local directory: /home/lab
-[I 20:00:53.903 NotebookApp] Jupyter Notebook 6.5.2 is running at:
-[I 20:00:53.903 NotebookApp] http://master:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
-[I 20:00:53.903 NotebookApp]  or http://127.0.0.1:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
-[I 20:00:53.903 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[C 20:00:53.907 NotebookApp]
+* En la salida de la ejecución de *pyspark* debemos buscar la URL en la que conectarnos:
+  ```
+  [I 20:00:53.903 NotebookApp] Serving notebooks from local directory: /home/lab
+  [I 20:00:53.903 NotebookApp] Jupyter Notebook 6.5.2 is running at:
+  [I 20:00:53.903 NotebookApp] http://master:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+  [I 20:00:53.903 NotebookApp]  or http://127.0.0.1:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+  [I 20:00:53.903 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+  [C 20:00:53.907 NotebookApp]
 
     To access the notebook, open this file in a browser:
         file:///home/lab/.local/share/jupyter/runtime/nbserver-97145-open.html
     Or copy and paste one of these URLs:
         http://master:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
      or http://127.0.0.1:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
-```
+  ```
 
-Por lo que podemos usar con esta salida la URL:
-```
-http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
-```
-Para conectarnos (estando en la misma red donde master es visible).
+* Para conectarnos debemos usar el nombre de la máquina *master* visible en nuestra red, en nuestro caso hay que cambiar *master* por *ssddX.cloud.lab.inf.uc3m.es*: 
+  ```
+  http://ssdd0.cloud.lab.inf.uc3m.es:8888/?token=bcefad0f329df8416ed6c4b40eb9d558bb9e1c4ed4a15ed8
+  ```
 
-Una vez conectados+as estaremos en la página inicial: ![image](jn01-intro.png)
-En la página inicial procederemos a crear un nuevo notebook: ![image](jn02-new-notebook.png)
-En el nuevo libro tendremos una nueva celda: ![image](jn03-new-cell.png)
-En la celda podemos copiar el ejemplo de pi: ![image](jn04-pi.png)
-En una nueva celda podemos copiar el número de palabras en local: ![image](jn05-pywc-local.png)
-En una nueva celda podemos copiar el número de palabras en remoto: ![image](jn06-pywc-remote.png)
+* Una vez conectados+as estaremos en la página inicial:  
+  ![Image](jn01-intro.png)
+
+* En la página inicial procederemos a crear un nuevo notebook:  
+  ![image](jn02-new-notebook.png)
+  
+* En el nuevo libro tendremos una nueva celda:  
+  ![image](jn03-new-cell.png)
+  
+* En la celda podemos copiar el ejemplo de PI (y ejecutarlo):  
+  ![image](jn04-pi.png)
+  
+* En una nueva celda podemos copiar el ejemplo de contar el número de palabras en local (y ejecutarlo):  
+  ![image](jn05-pywc-local.png)
+  
+* En una nueva celda podemos copiar el ejemplo de contar el número de palabras en remoto (y ejecutarlo):  
+  ![image](jn07-pywc-remote-2.png)
 
 
 ### 3.5 Ejemplo: uso de jupyter notebook con cluster
 
-Se configura los workers de Spark:
-```
-echo "nodo1" >> spark/conf/workers
-echo "nodo2" >> spark/conf/workers
-```
+* Se configura los workers de Spark:
+  ```
+  echo "nodo1" >> spark/conf/workers
+  echo "nodo2" >> spark/conf/workers
+  ```
 
-Todos los nodos han de poder comunicarse con SSH sin precisar clave, se recomienda este [tutorial de IBM](https://www.ibm.com/support/pages/configuring-ssh-login-without-password):
-```
-ssh-keygen -t rsa -P ""
-ssh-copy-id -i .ssh/id_rsa.pub lab@nodo1
-ssh-copy-id -i .ssh/id_rsa.pub lab@nodo2
-```
+* Todos los nodos han de poder comunicarse con SSH sin precisar clave.  
+  En caso de ser necesario, hay que ejecutar:
+  ```
+  ssh-keygen -t rsa -P ""
+  ssh-copy-id -i .ssh/id_rsa.pub lab@nodo1
+  ssh-copy-id -i .ssh/id_rsa.pub lab@nodo2
+  ```
+  Se recomienda este [tutorial de IBM](https://www.ibm.com/support/pages/configuring-ssh-login-without-password) para más información al respecto de este paso.
 
-Si no hay una cuenta compartida en todos los nodos entonces hay que asegurarse que se tiene la misma copia de Spark en todos los nodos:
-```
-scp –r spark lab@nodo1:~/
-scp –r spark lab@nodo2:~/
-```
+* Si no hay una cuenta compartida en todos los nodos entonces hay que asegurarse que se tiene la misma copia de Spark en todos los nodos mediante:
+  ```
+  scp –r spark lab@nodo1:~/
+  scp –r spark lab@nodo2:~/
+  ```
 
-En el nodo master se arranca Spark:
-```
-./spark/sbin/start-all.sh
-```
+* En el nodo master hay que arrancar *Spark*:
+  ```
+  ./spark/sbin/start-all.sh
+  ```
 
-Para trabajar en una sesión de trabajo, podemos usar pyspark y el siguiente fragmento de código:
-```
-val spark = SparkSession.builder()
-            .appName("EjemploSpark")
-            .master("spark://master:7077")
-            .getOrCreate()
-```
-El [tutorial](https://towardsdatascience.com/how-to-connect-jupyter-notebook-to-remote-spark-clusters-and-run-spark-jobs-every-day-2c5a0c1b61df) muestra un entorno parecido.
+* Recuerde antes tener borrado el directorio $HOME/lab_spark/pg2000-w que pueda tener alguna ejecución previa:
+  ```
+  rm -fr $HOME/lab_spark/pg2000-w
+  ```
 
-El programa cambia solo añadiendo ".master("spark://master:7077")" en nuestro ejemplo (recuerde tener borrado ~/lab_spark/pg2000-w antes):
-```
-import sys
-from operator import add
-from pyspark.sql import SparkSession
+* El programa cambia solo añadiendo ".master("spark://master:7077")" en nuestro ejemplo:
+  ```
+  import sys
+  from operator import add
+  from pyspark.sql import SparkSession
 
-sc = SparkSession.builder.appName("pywc").master("spark://master:7077").getOrCreate()
-lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
-counts = lines.flatMap(lambda x: x.split(' ')) \
-              .map(lambda x: (x, 1)) \
-              .reduceByKey(add)
-output = counts.collect()
-counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
-sc.stop()
-```
+  sc = SparkSession.builder.appName("pywc").master("spark://master:7077").getOrCreate()
+  lines = sc.read.text("/home/lab/lab_spark/2000-0.txt").rdd.map(lambda r: r[0])
+  counts = lines.flatMap(lambda x: x.split(' ')) \
+                .map(lambda x: (x, 1)) \
+                .reduceByKey(add)
+  output = counts.collect()
+  counts.saveAsTextFile("/home/lab/lab_spark/pg2000-w")
+  sc.stop()
+  ```
+  El [tutorial](https://towardsdatascience.com/how-to-connect-jupyter-notebook-to-remote-spark-clusters-and-run-spark-jobs-every-day-2c5a0c1b61df) muestra un entorno parecido.
 
-En el nodo master cuando se termine la sesión de trabajo se para Spark usando:
-```
-./spark/sbin/stop-all.sh
-```
+* Para terminar la sesión ejecutaremos:
+  ```
+  quit()
+  ```
+
+* Para ver el resultado ejecutaremos:
+  ```
+  cat /home/lab/lab_spark/pg2000-w/part-00000
+  ```
+
+* En el nodo master cuando se termine la sesión de trabajo se para *Spark* usando:
+  ```
+  ./spark/sbin/stop-all.sh
+  ```
 
 
 ## Bibliografía de ejemplos de Spark
