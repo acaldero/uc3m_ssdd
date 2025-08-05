@@ -1,11 +1,9 @@
-## Materiales para Sistemas Distribuidos
+# Sistemas Paralelos y Distribuidos
 
-<html>
-<ul>
-<li> <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">License</a> </li>
-<li> Curso 2024-2025</li>
-</ul>
-</html>
+&nbsp;&nbsp;&nbsp;
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL_v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
+&nbsp;
+![Curso 2025-2026](https://img.shields.io/badge/Curso-2025_2026-red.svg)
 
 
 ## 1. Pre-requisitos para trabajar en ssddX.cloud.lab.inf.uc3m.es

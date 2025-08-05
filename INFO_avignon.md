@@ -1,11 +1,9 @@
-## Materiales para Sistemas Distribuidos
+# Sistemas Paralelos y Distribuidos
 
-<html>
-<ul>
-<li> License <a href="https://github.com/acaldero/uc3m_ssdd/blob/main/LICENSE">GNU LGPL 2.1</a> </li>
-<li> Curso 2024-2025</li>
-</ul>
-</html>
+&nbsp;&nbsp;&nbsp;
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL_v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
+&nbsp;
+![Curso 2025-2026](https://img.shields.io/badge/Curso-2025_2026-red.svg)
 
 
 ## Sistema de colas en avignon.lab.inf.uc3m.es
@@ -14,25 +12,25 @@
 ### 1. Conexión SSH con las máquinas de trabajo
 
 * Si está fuera de la Universidad entonces una opción es primero conectarse a la máquina guernika.lab.inf.uc3m.es:
-```
-ssh -l <usuario+a cuenta en laboratorio> guernika.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave de la cuenta que no se mostrará cuando escriba>
-Linux avignon-frontend 5.10.0-18-amd64 #1 SMP Debian 5.10.140-1 (2022-09-02) x86_64
-...
-```
+  ```
+  ssh -l <usuario+a cuenta en laboratorio> guernika.lab.inf.uc3m.es
+  <usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave de la cuenta que no se mostrará cuando escriba>
+  Linux avignon-frontend 5.10.0-18-amd64 #1 SMP Debian 5.10.140-1 (2022-09-02) x86_64
+  ...
+  ```
 
 * A continuación conectarse a la máquina avignon.lab.inf.uc3m.es:
-```
-ssh -l <usuario+a cuenta en laboratorio> avignon.lab.inf.uc3m.es
-<usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave de la cuenta que no se mostrará cuando escriba>
-Linux avignon-frontend 5.10.0-18-amd64 #1 SMP Debian 5.10.140-1 (2022-09-02) x86_64
-...
-```
+  ```
+  ssh -l <usuario+a cuenta en laboratorio> avignon.lab.inf.uc3m.es
+  <usuario+a en lab>@avignon.lab.inf.uc3m.es's password: <clave de la cuenta que no se mostrará cuando escriba>
+  Linux avignon-frontend 5.10.0-18-amd64 #1 SMP Debian 5.10.140-1 (2022-09-02) x86_64
+  ...
+  ```
 
 * Una vez que finalice su sesión de trabajo, ha de cerrar cada conexión abierta (avignon, guernika, etc.) usando el mandato exit:
-```
-exit
-```
+  ```
+  exit
+  ```
 
 
 ### 2. Uso del sistema de colas de avignon.lab.inf.uc3m.es
@@ -103,11 +101,12 @@ exit
 
 
 #### 2.3 Selección de software específico a usar en el trabajo
-  Es posible que haya disponible distintas implementaciones de un software instaladas, y varias versiones de cada implementación.
-  Por ejemplo, si hay disponible distintos compiladores de C (gcc, clang, etc.) y varias versiones de alguno de ellos (gcc 10, gcc 12, etc.).<br/>
-  Para poder seleccionar qué software y qué versión queremos usar para un trabajo particular de entre los disponibles se utiliza el programa **module**.
+Es posible que haya disponible distintas implementaciones de un software instaladas, y varias versiones de cada implementación.
+Por ejemplo, si hay disponible distintos compiladores de C (gcc, clang, etc.) y varias versiones de alguno de ellos (gcc 10, gcc 12, etc.).<br/>
+Para poder seleccionar qué software y qué versión queremos usar para un trabajo particular de entre los disponibles se utiliza el programa **module**.
 
 <ol type="a">
+  
   a. Compruebe primero que software está disponible en avignon.lab.inf.uc3m.es (que es el nodo front-end o nodo de cabecera) o en el nodo interactivo con **module available**:
 ```
 module avail
