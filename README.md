@@ -8,9 +8,9 @@
 
 ## Laboratorios complementarios
 
-* [HPC en Sistemas Distribuidos](https://github.com/acaldero/uc3m_ssdd/blob/main/lab_mpi/README.md)
-* [Alta Escalabilidad en Sistemas Distribuidos](https://github.com/acaldero/uc3m_ssdd/blob/main/lab_spark/README.md)
-* [Tolerancia a fallos](https://github.com/acaldero/uc3m_ssdd/blob/main/lab_checkpoint/README.md)
+* [HPC en Sistemas Distribuidos](https://github.com/acaldero/spyd/blob/main/lab_mpi/README.md)
+* [Alta Escalabilidad en Sistemas Distribuidos](https://github.com/acaldero/spyd/blob/main/lab_spark/README.md)
+* [Tolerancia a fallos](https://github.com/acaldero/spyd/blob/main/lab_checkpoint/README.md)
 
 
 ## Pre-requisitos generales
